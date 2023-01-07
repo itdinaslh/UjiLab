@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <partial name="_Head" />
+    @await RenderSectionAsync("styles", required: false)
+</head>
+<body>
+    <!-- Loader starts-->
+    <partial name="_Loader" />
+    <!-- Loader ends-->
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper" id="pageWrapper">
+        <!-- Page Header Start-->
+       <partial name="_Header" />
+        
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper horizontal-menu">
+            <!-- Page Sidebar Start-->
+            <partial name="_SidebarAdmin" />
+            
+            <div class="page-body">
+                @*BreadCrumb*@
+                @*<partial name="_Breadcrumb" />*@
+
+                @*MainContent*@
+                @RenderBody()                
+            </div>
+
+            @*Footer*@
+            <partial name="_Footer" />
+        </div>
+    </div>
+    
+    <partial name="_RequiredScript" />
+    @await RenderSectionAsync("scripts", required: false)
+    <!-- login js-->
+    <!-- Plugin used-->
+</body>
+</html>
