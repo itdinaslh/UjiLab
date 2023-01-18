@@ -14,8 +14,15 @@ namespace UjiLab.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        [HttpGet("/")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet("/dashboard")]
+        public IActionResult Dashboard()
         {
             return View();
         }

@@ -1,6 +1,6 @@
 ﻿@model MetodeSampling
 
-<form action="/master/bidang-usaha/store" method="post">
+<form action="/master/metode-sampling/store" method="post">
     <div class="modal-header">
         @if (Model.MetodeSamplingID != 0)
         {
@@ -15,7 +15,7 @@
     <div class="modal-body">
         <input type="hidden" asp-for="MetodeSamplingID">
         <div class="form-group">
-            <label>Nama Bidang Usaha</label>
+            <label>Nama Metode Sampling</label>
             <input type="text" asp-for="NamaMetode" class="form-control" autofocus autocomplete="off" />
             <span asp-validation-for="NamaMetode" class="text-danger"></span>
         </div>

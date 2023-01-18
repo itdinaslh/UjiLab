@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UjiLab.Domain.Entities;
 using UjiLab.Domain.Repositories;
+using UjiLab.Helpers;
 
 namespace UjiLab.Controllers.Master;
 
@@ -38,5 +39,18 @@ public class MetodeSamplingController : Controller
         }
 
         return NotFound();
+    }
+
+    [HttpPost("/master/metode-sampling/store")]
+    public async Task<IActionResult> Store(MetodeSampling metode)
+    {
+        if (ModelState.IsValid)
+        {
+            await repo.SaveDataAsync(metode);
+
+            return Json(Result.Success());
+        }
+
+        return PartialView("~/Views/Master/MetodeSampling/AddEdit.cshtml", metode);
     }
 }
