@@ -1,0 +1,27 @@
+﻿@model BidangUsaha
+
+<form action="/master/bidang-usaha/store" method="post">
+    <div class="modal-header">
+        @if (Model.BidangUsahaID != 0)
+        {
+            <h5 class="model-title">Edit Master Bidang Usaha</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master Bidang Usaha</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="BidangUsahaID">
+        <div class="form-group">
+            <label>Nama Bidang Usaha</label>
+            <input type="text" asp-for="NamaBidangUsaha" class="form-control" autofocus autocomplete="off" />
+            <span asp-validation-for="NamaBidangUsaha" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+﻿@model Kondisi
+
+<form action="/master/kondisi/store" method="post">
+    <div class="modal-header">
+        @if (Model.KondisiID != 0)
+        {
+            <h5 class="model-title">Edit Master Kondisi Contoh</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master Kondisi Contoh</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="KondisiID">
+        <div class="form-group">
+            <label>Nama Kondisi Contoh</label>
+            <input type="text" asp-for="NamaKondisi" class="form-control" autofocus autocomplete="off" />
+            <span asp-validation-for="NamaKondisi" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

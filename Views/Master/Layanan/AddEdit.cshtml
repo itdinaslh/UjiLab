@@ -1,0 +1,27 @@
+﻿@model Layanan
+
+<form action="/master/layanan/store" method="post">
+    <div class="modal-header">
+        @if (Model.LayananID != 0)
+        {
+            <h5 class="model-title">Edit Master Layanan</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master Layanan</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="LayananID">
+        <div class="form-group">
+            <label>Nama Layanan</label>
+            <input type="text" asp-for="NamaLayanan" class="form-control" autofocus autocomplete="off" />
+            <span asp-validation-for="NamaLayanan" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

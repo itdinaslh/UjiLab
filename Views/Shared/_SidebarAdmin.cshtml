@@ -33,8 +33,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="headphones"></i><span>Raise Support</span></a></li>
+                    </li>                    
                     <li class="dropdown">
                         <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="database"></i><span>Master Data</span></a>
                         <ul class="nav-submenu menu-content">
@@ -45,6 +44,15 @@
                                     <li><a asp-action="Kabupaten" asp-controller="Wilayah">Kabupaten</a></li>
                                     <li><a asp-action="Kecamatan" asp-controller="Wilayah">Kecamatan</a></li>
                                     <li><a asp-action="Kelurahan" asp-controller="Wilayah">Kelurahan</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="submenu-title" href="javascript:void(0)">Umum<span class="sub-arrow"><i class="fa fa-chevron-right"></i></span></a>
+                                <ul class="nav-sub-childmenu submenu-content">
+                                    <li><a asp-action="Index" asp-controller="Kondisi">Kondisi</a></li>
+                                    <li><a asp-action="Index" asp-controller="Layanan">Layanan</a></li>
+                                    <li><a asp-action="Index" asp-controller="BidangUsaha">Bidang Usaha</a></li>
+                                    <li><a asp-action="Index" asp-controller="MetodeSampling">Metode Sampling</a></li>
                                 </ul>
                             </li>
                         </ul>
