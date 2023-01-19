@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\register\" />
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
 </Project>
