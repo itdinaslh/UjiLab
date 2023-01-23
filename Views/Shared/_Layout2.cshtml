@@ -9,17 +9,23 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="~/logo-dinas.ico">
 
+        @await RenderSectionAsync("plugincss", required: false)
+
         <!-- Layout config Js -->
         <script src="~/dist/assets/js/layout.js"></script>
         <!-- Bootstrap Css -->
         <link href="~/dist/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+        @await RenderSectionAsync("styles", required: false)
+
         <!-- Icons Css -->
         <link href="~/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="~/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />        
+
         <!-- custom Css-->
         <link href="~/dist/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
-        @*@RenderSectionAsync("styles", required: false)*@
+        
     </head>
 
     <body>
@@ -71,8 +77,11 @@
         <script src="~/dist/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
         <script src="~/dist/assets/js/plugins.js"></script>
 
+        @await RenderSectionAsync("pluginjs", required: false)
+        @await RenderSectionAsync("scripts", required: false)
+
         <!-- App js -->
         <script src="~/dist/assets/js/app.js"></script>
-        @*@RenderSectionAsync("scripts", required: false)*@
+        
     </body>
 </html>

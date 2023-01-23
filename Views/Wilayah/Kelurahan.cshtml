@@ -1,25 +1,69 @@
 ﻿@{
     ViewBag.Title = "Kelurahan";
+    ViewBag.Parent = "Wilayah";
 }
 
-<div class="container-fluid">
-    <div class="page-header">
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Kelurahan</h3>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Master Data</li>
-                    <li class="breadcrumb-item">Wilayah</li>
-                    <li class="breadcrumb-item">Kelurahan</li>
+@section plugincss {
+    <!--datatable css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <!--datatable responsive css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Kelurahan</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Master Data</a></li>
+                    <li class="breadcrumb-item active">Kelurahan</li>
                 </ol>
             </div>
-            @*<div class="col-sm-6">
-                <div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="plus-circle"></i></a></li>
-                    </ul>
-                </div>
-            </div>*@
         </div>
     </div>
 </div>
+<!-- end page title -->
+
+<!-- Content -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Master Data Kelurahan</h5>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <table id="tblData" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Nama Kelurahan</th>
+                                <th>Kecamatan</th>
+                                <th>Kabupaten/Kota</th>
+                                <th>Provinsi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pluginjs {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!--datatable js-->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/js/modalForm.js"></script>
+}
+
+@section scripts {
+    <script src="~/pages/wilayah/kelurahan.js"></script>
+}

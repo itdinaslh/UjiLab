@@ -22,9 +22,10 @@ function loadTable() {
             { data: 'bidangUsahaID', name: 'bidangUsahaID', autowidth: true },
             { data: 'namaBidangUsaha', name: 'namaBidangUsaha', autowidth: true },
             {
-                "render": function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/layanan/edit/?layananID="
-                        + row.layananID + "'><i class='fa fa-edit'></i> Edit</button>";
+                data: 'bidangUsahaID',
+                render: function (data, type, row) {
+                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/bidang-usaha/edit/?bidangUsahaID="
+                        + row.bidangUsahaID + "'><i class='fa fa-edit'></i> Edit</button>";
                 }
             }
         ],

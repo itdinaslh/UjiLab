@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UjiLab.Data;
 
@@ -10,9 +11,10 @@ using UjiLab.Data;
 namespace UjiLab.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230123165347_CreateTipeUsaha")]
+    partial class CreateTipeUsaha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,109 +39,6 @@ namespace UjiLab.Migrations
                     b.HasKey("BidangUsahaID");
 
                     b.ToTable("bidangusaha");
-                });
-
-            modelBuilder.Entity("UjiLab.Domain.Entities.Client", b =>
-                {
-                    b.Property<Guid>("ClientID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Alamat")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("BidangUsahaID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DokumenIzinPath")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("EmailPIC")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("KelurahanID")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<string>("KtpPath")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NIK")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
-
-                    b.Property<string>("NamaClient")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("NamaPIC")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
-
-                    b.Property<string>("PosisiPIC")
-                        .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("varchar(75)");
-
-                    b.Property<string>("RealDokumenIzinPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RealKtpPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RealSuratKuasaPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("SuratKuasaPath")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TelpPIC")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
-
-                    b.Property<int>("TipeUsahaID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid>("UserID")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("ClientID");
-
-                    b.HasIndex("BidangUsahaID");
-
-                    b.HasIndex("KelurahanID");
-
-                    b.HasIndex("TipeUsahaID");
-
-                    b.ToTable("clients");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Kabupaten", b =>
@@ -365,33 +264,6 @@ namespace UjiLab.Migrations
                     b.ToTable("tipeusaha");
                 });
 
-            modelBuilder.Entity("UjiLab.Domain.Entities.Client", b =>
-                {
-                    b.HasOne("UjiLab.Domain.Entities.BidangUsaha", "BidangUsaha")
-                        .WithMany("Clients")
-                        .HasForeignKey("BidangUsahaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UjiLab.Domain.Entities.Kelurahan", "Kelurahan")
-                        .WithMany("Clients")
-                        .HasForeignKey("KelurahanID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UjiLab.Domain.Entities.TipeUsaha", "TipeUsaha")
-                        .WithMany("Clients")
-                        .HasForeignKey("TipeUsahaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BidangUsaha");
-
-                    b.Navigation("Kelurahan");
-
-                    b.Navigation("TipeUsaha");
-                });
-
             modelBuilder.Entity("UjiLab.Domain.Entities.Kabupaten", b =>
                 {
                     b.HasOne("UjiLab.Domain.Entities.Provinsi", "Provinsi")
@@ -419,11 +291,6 @@ namespace UjiLab.Migrations
                     b.Navigation("Kecamatan");
                 });
 
-            modelBuilder.Entity("UjiLab.Domain.Entities.BidangUsaha", b =>
-                {
-                    b.Navigation("Clients");
-                });
-
             modelBuilder.Entity("UjiLab.Domain.Entities.Kabupaten", b =>
                 {
                     b.Navigation("Kecamatans");
@@ -434,19 +301,9 @@ namespace UjiLab.Migrations
                     b.Navigation("Kelurahans");
                 });
 
-            modelBuilder.Entity("UjiLab.Domain.Entities.Kelurahan", b =>
-                {
-                    b.Navigation("Clients");
-                });
-
             modelBuilder.Entity("UjiLab.Domain.Entities.Provinsi", b =>
                 {
                     b.Navigation("Kabupatens");
-                });
-
-            modelBuilder.Entity("UjiLab.Domain.Entities.TipeUsaha", b =>
-                {
-                    b.Navigation("Clients");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,7 @@ using UjiLab.Domain.Repositories;
 using UjiLab.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using UjiLab.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UjiLab.Controllers;
 
@@ -15,6 +16,7 @@ public class BidangUsahaController : Controller
         this.repo = repo;
     }
 
+    [Authorize]
     [HttpGet("/master/bidang-usaha")]
     public IActionResult Index()
     {

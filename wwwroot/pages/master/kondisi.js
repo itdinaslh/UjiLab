@@ -22,7 +22,8 @@ function loadTable() {
             { data: 'kondisiID', name: 'kondisiID', autowidth: true },            
             { data: 'namaKondisi', name: 'namaKondisi', autowidth: true },
             {
-                "render": function (data, type, row) {
+                data: 'kondisiID',
+                render: function (data, type, row) {
                     return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/kondisi/edit/?kondisiID="
                         + row.kondisiID + "'><i class='fa fa-edit'></i> Edit</button>";
                 }

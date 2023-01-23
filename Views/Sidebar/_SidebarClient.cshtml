@@ -1,0 +1,72 @@
+﻿<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a asp-action="Dashboard" asp-controller="Home" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="~/dist/assets/images/logo/logo2.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="~/dist/assets/images/logo/llhd-dark.png" alt="" height="22">
+            </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="index.html" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="~/dist/assets/images/logo/logo2.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="~/dist/assets/images/logo/llhd-light.png" alt="" height="22">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+
+                <li class="nav-item">
+                    <a asp-action="Dashboard" asp-controller="Home" class='nav-link menu-link @(ViewBag.Title == "Dashboard" ? "active" : "")'>
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Rencana Kegiatan</span></li>
+
+                <li class="nav-item">
+                    <a asp-action="Index" asp-controller="Profile" class='nav-link menu-link @(ViewBag.Title == "Profiling" ? "active" : "")'>
+                        <i class="ri-contacts-line"></i> <span data-key="t-profiling">Profiling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-controller="Pengajuan" class='nav-link menu-link @(ViewBag.Title == "Pengajuan Uji Lab" ? "active" : "")'>
+                        <i class="ri-contacts-line"></i> <span data-key="t-pengajuan">Pengajuan Uji Lab</span>
+                    </a>
+                </li>
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Reports</span></li>
+
+                <li class="nav-item">
+                    <a asp-action="Registration" asp-controller="Report" class='nav-link menu-link @(ViewBag.Title == "Data Registrasi" ? "active" : "")'>
+                        <i class="ri-file-paper-line"></i> <span data-key="t-registration">Cetak Registrasi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="LHU" asp-controller="Report" class='nav-link menu-link @(ViewBag.Title == "Cetak Draft LHU" ? "active" : "")'>
+                        <i class="ri-printer-line"></i> <span data-key="t-lhu">Cetak LHU</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+
+    <div class="sidebar-background"></div>
+</div>
