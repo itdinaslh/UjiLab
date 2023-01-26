@@ -20,7 +20,8 @@ public class AppDbContext : DbContext
     public DbSet<Layanan> Layanans { get; set; }
     public DbSet<Kondisi> Kondisis { get; set; }
     public DbSet<MetodeSampling> MetodeSamplings { get; set; }
-    public DbSet<TipeUsaha> tipeUsahas { get; set; }
+    public DbSet<TipeUsaha> TipeUsahas { get; set; }
+    public DbSet<Status> Statuses { get; set; }
 
     // Main
     public DbSet<Client> Clients { get; set; }

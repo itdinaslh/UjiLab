@@ -47,4 +47,18 @@ public class BidangUsahaApiController : ControllerBase
 
         return Ok(jsonData);
     }
+
+    [HttpGet("/api/master/bidang-usaha/search")]
+    public async Task<IActionResult> Search(string? term)
+    {
+        var data = await repo.BidangUsahas
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.NamaBidangUsaha.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.BidangUsahaID,
+                data = s.NamaBidangUsaha
+            }).ToListAsync();
+
+        return Ok(data);
+    }
 }

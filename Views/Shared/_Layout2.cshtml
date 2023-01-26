@@ -33,7 +33,13 @@
         <div id="layout-wrapper">
             <partial name="_Header" />
             <!-- ========== App Menu ========== -->
-            <partial name="_Sidebar" />
+            @if (User.IsInRole("SysAdmin"))
+            {
+                <partial name="_SidebarAdmin" />
+            } else if (User.IsInRole("LabClient"))
+            {
+                <partial name="~/Views/Sidebar/_SidebarClient.cshtml" />
+            }
             <!-- Left Sidebar End -->
             <!-- Vertical Overlay-->
             <div class="vertical-overlay"></div>

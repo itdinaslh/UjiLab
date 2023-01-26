@@ -49,7 +49,13 @@
         <!-- Page Body Start-->
         <div class="page-body-wrapper horizontal-menu">
             <!-- Page Sidebar Start-->
-            <partial name="_SidebarAdmin" />
+            @if (User.IsInRole("SysAdmin"))
+            {
+                <partial name="_SidebarAdmin" />
+            } else if (User.IsInRole("LabClient"))
+            {
+                <partial name="~/Views/Sidebar/_SidebarClient.cshtml" />
+            }            
             
             <div class="page-body">
                 @*BreadCrumb*@

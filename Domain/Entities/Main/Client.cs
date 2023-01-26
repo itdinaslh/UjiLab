@@ -62,33 +62,42 @@ public class Client
 
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "File KTP PIC wajib diupload")]
-    public string KtpPath { get; set; }
+    public string KtpPath { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]
-    public string RealKtpPath { get; set; }
+    public string RealKtpPath { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "Surat Kuasa / Keterangan wajib diupload!")]
-    public string SuratKuasaPath { get; set; }
+    public string SuratKuasaPath { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]
-    public string RealSuratKuasaPath { get; set; }
+    public string RealSuratKuasaPath { get; set; } = string.Empty;
+
+#nullable enable
+
+    [DataType(DataType.Text)]    
+    public string? DokumenIzinPath { get; set; }
 
     [DataType(DataType.Text)]
-    [Required(ErrorMessage = "Dokumen Izin Lingkungan wajib diupload!")]
-    public string DokumenIzinPath { get; set; }
-
-    [DataType(DataType.Text)]
-    public string RealDokumenIzinPath { get; set; }
+    public string? RealDokumenIzinPath { get; set; }
 
     public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
     public DateTime? UpdatedAt { get; set; } = DateTime.Now;
+
+#nullable disable
+
+    public int StatusID { get; set; }
+
+    public bool IsVerified { get; set; } = false;
 
     public TipeUsaha TipeUsaha { get; set; }
 
     public BidangUsaha BidangUsaha { get; set; }
 
     public Kelurahan Kelurahan { get; set; }
+
+    public Status Status { get; set; }
 
 }

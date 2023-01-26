@@ -346,6 +346,9 @@
                                     @if (User.IsInRole("SysAdmin"))
                                     {
                                         <span>System Administrator</span>
+                                    } else if (User.IsInRole("LabClient"))
+                                    {
+                                        <span>User Client</span>
                                     }
                                 </span>
                             </span>
