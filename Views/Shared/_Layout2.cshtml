@@ -35,7 +35,7 @@
             <!-- ========== App Menu ========== -->
             @if (User.IsInRole("SysAdmin"))
             {
-                <partial name="_SidebarAdmin" />
+                <partial name="_Sidebar" />
             } else if (User.IsInRole("LabClient"))
             {
                 <partial name="~/Views/Sidebar/_SidebarClient.cshtml" />

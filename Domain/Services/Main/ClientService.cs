@@ -15,5 +15,7 @@ public class ClientService : IClient
     public async Task StoreDataAsync(Client client)
     {
         await context.Clients.AddAsync(client);
+
+        await context.SaveChangesAsync();
     }
 }

@@ -60,15 +60,13 @@ public class Client
     [MaxLength(25)]
     public string TelpPIC { get; set; }
 
-    [DataType(DataType.Text)]
-    [Required(ErrorMessage = "File KTP PIC wajib diupload")]
+    [DataType(DataType.Text)]    
     public string KtpPath { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]
     public string RealKtpPath { get; set; } = string.Empty;
 
-    [DataType(DataType.Text)]
-    [Required(ErrorMessage = "Surat Kuasa / Keterangan wajib diupload!")]
+    [DataType(DataType.Text)]    
     public string SuratKuasaPath { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]

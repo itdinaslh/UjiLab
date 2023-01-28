@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UjiLab.Domain.Repositories;
 using System.Linq.Dynamic.Core;
@@ -8,16 +9,14 @@ namespace UjiLab.Controllers.api;
 
 [Route("api/[controller]")]
 [ApiController]
-public class KondisiApiController : ControllerBase
+[Authorize(Roles = "SysAdmin, LabAdmin")]
+public class ClientApiController : ControllerBase
 {
-    private readonly IKondisi repo;
+    private readonly IClient repo;
 
-    public KondisiApiController(IKondisi repo)
-    {
-        this.repo = repo;
-    }
+    public ClientApiController(IClient repo) { this.repo = repo; }
 
-    [HttpPost("/api/master/kondisi")]
+    [HttpPost("/api/clients/list")]
     public async Task<IActionResult> DataTable()
     {
         var draw = Request.Form["draw"].FirstOrDefault();
@@ -30,7 +29,12 @@ public class KondisiApiController : ControllerBase
         int skip = start != null ? Convert.ToInt32(start) : 0;
         int recordsTotal = 0;
 
-        var init = repo.Kondisis;
+        var init = repo.Clients.Select(x => new { 
+            clientID = x.ClientID,
+            namaClient = x.NamaClient,
+            namaTipe = x.TipeUsaha.NamaTipe,
+            statusName = x.Status.StatusName
+        });
 
         if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
         {
@@ -39,7 +43,7 @@ public class KondisiApiController : ControllerBase
 
         if (!string.IsNullOrEmpty(searchValue))
         {
-            init = init.Where(a => a.NamaKondisi.ToLower().Contains(searchValue.ToLower()));
+            init = init.Where(a => a.namaClient.ToLower().Contains(searchValue.ToLower()));
         }
 
         recordsTotal = init.Count();
