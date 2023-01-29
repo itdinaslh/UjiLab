@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using UjiLab.Domain.Repositories;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace UjiLab.Controllers.api;
 
@@ -29,8 +30,10 @@ public class ClientApiController : ControllerBase
         int skip = start != null ? Convert.ToInt32(start) : 0;
         int recordsTotal = 0;
 
-        var init = repo.Clients.Select(x => new { 
+        CultureInfo idID = new CultureInfo("id-ID");
+        var init = repo.Clients.Select(x => new {
             clientID = x.ClientID,
+            createdAt = x.CreatedAt.ToString("dddd, dd MMMM yyyy", idID),
             namaClient = x.NamaClient,
             namaTipe = x.TipeUsaha.NamaTipe,
             statusName = x.Status.StatusName

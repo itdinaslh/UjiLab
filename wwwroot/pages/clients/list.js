@@ -12,30 +12,30 @@ function loadTable() {
         serverSide: true,
         processing: true,
         responsive: true,
-        stateSave: true,
+        stateSave: true,        
         lengthMenu: [5, 10, 20],
         ajax: {
             url: '/api/clients/list',
             method: 'POST'
         },
         columns: [
-            { data: 'clientID', name: 'clientID', autowidth: true },
-            { data: 'namaClient', name: 'namaClient', autowidth: true },
-            { data: 'namaTipe', name: 'namaTipe', autowidth: true },
+            { data: 'namaClient', name: 'namaClient', autowidth: true, orderable: false },
+            { data: 'createdAt', name: 'createdAt', autowidth: true, searchable: false, orderable: false },                                    
+            { data: 'namaTipe', name: 'namaTipe', autowidth: true, orderable: false, searchable: false },
             {
                 data: 'statusName',
                 render: function (data, type, row) {
                     return "<span class='text-bg-success p-2'>" + row.statusName + "</span>";
-                }
+                }                
             },
             {
                 data: 'clientID',
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' data-href='/clients/details/verify/?id="
-                        + row.clientID + "'><i class='fa fa-edit'></i> Edit</button>";
-                }
+                    return "<button class='btn btn-sm btn-danger mr-2 showMe' data-href='/clients/details/verify/?id="
+                        + row.clientID + "'><i class='ri-edit-box-line'></i></button>";
+                },
+                orderable: false,                
             }
-        ],
-        order: [[0, "desc"]]
+        ]        
     });
 }

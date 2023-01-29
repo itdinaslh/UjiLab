@@ -80,7 +80,7 @@ public class Client
     [DataType(DataType.Text)]
     public string? RealDokumenIzinPath { get; set; }
 
-    public DateTime? CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public DateTime? UpdatedAt { get; set; } = DateTime.Now;
 
