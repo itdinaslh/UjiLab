@@ -35,7 +35,7 @@ public class RegistrationController : Controller
         string wwwPath = Uploads.Path;
 
         string path = Path.Combine(wwwPath, @"clients/" + uid);
-        string thumbImg = path + @"/thumbnail";
+        string thumbImg = path + @"/thumbnails";
 
         if (!Directory.Exists(path))
         {

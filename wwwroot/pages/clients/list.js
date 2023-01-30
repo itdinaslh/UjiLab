@@ -31,8 +31,8 @@ function loadTable() {
             {
                 data: 'clientID',
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-danger mr-2 showMe' data-href='/clients/details/verify/?id="
-                        + row.clientID + "'><i class='ri-edit-box-line'></i></button>";
+                    return "<a class='btn btn-sm btn-danger mr-2' href='/clients/verify/?id="
+                        + row.clientID + "'><i class='ri-edit-box-line'></i></a>";
                 },
                 orderable: false,                
             }

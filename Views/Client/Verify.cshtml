@@ -1,0 +1,249 @@
+﻿@model ClientDetailsVM
+
+@{
+    ViewBag.Title = "Detail Pelanggan";
+    ViewBag.Parent = "Rencana";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/css/preview.css" />
+}
+
+<!-- Modal for image preview -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+
+    <img class="modal-content" id="img01">
+
+    <div id="caption"></div>
+</div>
+
+<div class="position-relative mx-n4 mt-n4">
+    <div class="profile-wid-bg profile-setting-img">
+        <img src="~/dist/assets/images/lab.jpg" class="profile-wid-img" alt="">        
+    </div>
+</div>
+
+
+<!-- Content -->
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card" style="margin-top: -8rem !important">
+            <div class="card-header">
+                <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#informasiAkun" role="tab">
+                            <i class="fas fa-home"></i> Informasi Akun
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#dataPIC" role="tab">
+                            <i class="far fa-user"></i> Data PIC
+                        </a>
+                    </li>                    
+                </ul>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="informasiAkun" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Email Login <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Email" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Kegiatan Usaha <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Nama" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Tipe Usaha <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="TipeUsaha" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Bidang Usaha <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="BidangUsaha" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Telp. Perusahaan <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Telp" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Provinsi <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Provinsi" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Kota / Kabupaten <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Kabupaten" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Kecamatan <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Kecamatan" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Kelurahan <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="Kelurahan" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Alamat <span class="text-danger">*</span></label>
+                                    <textarea asp-for="Alamat" class="form-control" rows="2" readonly></textarea>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dataPIC" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama PIC <span class="text-danger">*</span></label>
+                                    <input asp-for="NamaPIC" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">NIK <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="NIK" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Email PIC <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="EmailPIC" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Posisi <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="PosisiPIC" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-5">
+                                    <label class="form-label">Telepon <span class="text-danger">*</span></label>
+                                    <input class="form-control" asp-for="TelpPIC" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card" style="margin-top: -8rem !important">
+            <div class="row pt-4 ps-4">
+                <div class="row">
+                    <div class="col-md-12 mb-2 text-center">
+                        <h3>Dokumen</h3>                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-center">
+                                <h6 class="text-white">KTP</h6>
+                            </div>
+                            <span class="btnImage" data-href="@Model.RealKtpPath" data-alt="KTP" style="cursor:pointer;">
+                                <img src="@Model.KtpPath" class="card-img-top mb-2" alt="ktp" style="height:150px;" />
+                            </span>
+                            
+                            <div class="card-body" style="padding:10px !important;">
+                                <div class="text-center mb-3">
+                                    <button class="btn btn-danger"><i class="ri-download-2-line"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-center">
+                                <h6 class="text-white">Surat Kuasa</h6>
+                            </div>
+                            <span class="btnImage" data-href="@Model.RealSuratKuasaPath" data-alt="Surat Kuasa" style="cursor:pointer;">
+                                <img src="@Model.SuratKuasaPath" class="card-img-top mb-2" alt="Surat Kuasa" style="height:150px;" />
+                            </span>
+                            <div class="card-body" style="padding:10px !important;">
+                                <div class="text-center mb-3">
+                                    <button class="btn btn-danger"><i class="ri-download-2-line"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-center">
+                                <h6 class="text-white">Perizinan</h6>
+                            </div>
+                            <span class="btnImage" data-href="@Model.RealIzinPath" data-alt="Perizinan" style="cursor:pointer;">
+                                <img src="@Model.IzinPath" class="card-img-top mb-2" alt="Perizinan" style="height:150px;" />
+                            </span>
+                            <div class="card-body" style="padding:10px !important;">
+                                <div class="text-center mb-3">
+                                    <button class="btn btn-danger"><i class="ri-download-2-line"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row pt-4 ps-4">
+                <div class="row">
+                    <div class="col-md-12 mb-2 text-center">
+                        <h3>Persetujuan</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Persetujuan</label>
+                        <select class="form-control">
+                            <option>-- Pilih Persetujuan --</option>
+                            <option value="1">Sesuai</option>
+                            <option value="0">Revisi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mt-3 mb-3 text-center">
+                        <a class="btn btn-danger" href="/clients/list">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pluginjs {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+}
+
+@section scripts {
+    <script src="~/js/preview.js"></script>
+}
