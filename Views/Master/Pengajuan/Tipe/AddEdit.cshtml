@@ -1,0 +1,40 @@
+﻿@model TipePengajuan
+
+@{
+    ViewBag.Title = "Tipe Pengajuan";
+}
+
+<form action="/master/pengajuan/tipe/store" method="post">
+    <div class="modal-header">
+        @if (Model.TipePengajuanID != 0)
+        {
+            <h5 class="model-title">Edit Master @ViewBag.Title</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master @ViewBag.Title"></h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="TipePengajuanID">
+        <div class="form-group mb-3">
+            <label>Nama Tipe Pengajuan</label>
+            <input type="text" asp-for="NamaTipe" class="form-control" placeholder="Input nama tipe pengajuan.." autofocus autocomplete="off" required />
+            <span asp-validation-for="NamaTipe" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Jenis pengajuan</label>
+            <select asp-for="JenisPengajuanID" class="form-control" required >
+                <option>-- Pilih jenis pengajuan --</option>
+                <option value="1">Air</option>
+                <option value="2">Udara</option>
+            </select>
+            <span asp-validation-for="JenisPengajuanID" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

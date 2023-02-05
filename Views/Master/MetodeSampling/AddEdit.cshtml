@@ -14,17 +14,17 @@
     </div>
     <div class="modal-body">
         <input type="hidden" asp-for="MetodeSamplingID">
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label>Nama Metode Sampling</label>
             <input type="text" asp-for="NamaMetode" class="form-control" autofocus autocomplete="off" />
             <span asp-validation-for="NamaMetode" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label>Kode</label>
             <input type="text" asp-for="Kode" class="form-control" autocomplete="off" />
             <span asp-validation-for="Kode" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label>Deskripsi</label>
             <textarea rows="3" asp-for="Deskripsi" class="form-control"></textarea>
             <span asp-validation-for="Deskripsi" class="text-danger"></span>

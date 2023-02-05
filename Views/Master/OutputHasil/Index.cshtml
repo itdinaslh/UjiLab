@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Metode Sampling";
+    ViewBag.Title = "Output Hasil";
     ViewBag.Parent = "Master";
 }
 
@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
     <!--datatable responsive css-->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+    @*select2*@
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 }
 
 @section styles {
     <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
+    <link href="~/dist/assets/css/custom.css" rel="stylesheet" type="text/css" />
 }
 
 <!--Modal Window-->
@@ -27,12 +30,12 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0">Metode Sampling</h4>
+            <h4 class="mb-sm-0">@ViewBag.Title</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Master Data</a></li>
-                    <li class="breadcrumb-item active">Metode Sampling</li>
+                    <li class="breadcrumb-item active">@ViewBag.Title</li>
                 </ol>
             </div>
         </div>
@@ -47,10 +50,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h5 class="card-title mb-0">Master Data Metode Sampling</h5>
+                        <h5 class="card-title mb-0">Master Data @ViewBag.Title</h5>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-primary btn-sm showMe" data-href="/master/metode-sampling/create">Tambah</button>
+                        <button type="button" class="btn btn-primary btn-sm showMe" data-href="/master/output-hasil/create">Tambah</button>
                     </div>
                 </div>                
             </div>
@@ -60,10 +63,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama Metode</th>
+                                <th>Nama Output</th>
                                 <th>Kode</th>
-                                <th>Deskripsi</th>
-                                <th>Action</th>
+                                <th>Tipe Pengajuan</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -80,10 +83,11 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="~/lib/sweetalert/sweetalert2.all.min.js"></script>
     <script src="~/js/modalForm.js"></script>
 }
 
-@section scripts {    
-    <script src="~/pages/master/metode.js"></script>
+@section scripts {
+    <script src="~/pages/master/output.js"></script>
 }

@@ -1,0 +1,39 @@
+﻿@model OutputHasil
+
+<form action="/master/output-hasil/store" method="post">
+    <div class="modal-header">
+        @if (Model.OutputHasilID != 0)
+        {
+            <h5 class="model-title">Edit Master Output Hasil</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master Output Hasil</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="OutputHasilID">
+        <div class="form-group mb-3">
+            <label>Nama Output</label>
+            <input type="text" asp-for="OutputName" class="form-control" autofocus autocomplete="off" required />
+            <span asp-validation-for="OutputName" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label>Kode</label>
+            <input type="text" asp-for="Kode" class="form-control" autocomplete="off" required />
+            <span asp-validation-for="Kode" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label>Tipe Pengajuan</label>
+            <select id="sTipe" asp-for="TipePengajuanID" class="form-control" required >
+
+            </select>
+            <span asp-validation-for="TipePengajuanID" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UjiLab.Domain.Entities;
 using UjiLab.Domain.Repositories;
@@ -6,6 +7,7 @@ using UjiLab.Helpers;
 
 namespace UjiLab.Controllers.Master;
 
+[Authorize]
 public class MetodeSamplingController : Controller
 {
 
