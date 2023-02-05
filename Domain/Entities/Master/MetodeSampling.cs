@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
+[Table("metodesamplings")]
 public class MetodeSampling
 {
     public int MetodeSamplingID { get; set; }
