@@ -6,7 +6,7 @@ namespace UjiLab.Controllers;
 public class TransactionController : Controller
 {
     [Authorize(Roles = "LabClient")]
-    [HttpGet("/transaction/client/list")]
+    [HttpGet("/transaction/clients/list")]
     public IActionResult ClientIndex()
     {
         return View();

@@ -33,3 +33,37 @@
     </div>
 </div>
 <!-- end page title -->
+<!-- Content -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Data @ViewBag.Title</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" class="btn btn-primary btn-sm showMe" data-href="/transaksi/clients/create"><i class="ri-play-list-add-line"></i> Tambah</button>
+                    </div>
+                </div>                
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <table id="tblData" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Tgl. Pengajuan</th>
+                                <th>Nomor Pengajuan</th>
+                                <th>Tgl. Penyerahan Sample</th>
+                                <th>Nama PT/Instansi</th>
+                                <th>Biaya Total</th>
+                                <th>Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
