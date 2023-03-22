@@ -119,6 +119,9 @@
                     <div class='collapse menu-dropdown @(ViewBag.Parent == "Master" ? "show" : "")' id="masterData">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                                <a asp-action="Index" asp-controller="BakuMutu" class='nav-link @(ViewBag.Title == "Baku Mutu" ? "active" : "")' data-key="t-baku-mutu"> Baku Mutu </a>
+                            </li>
+                            <li class="nav-item">
                                 <a asp-action="Index" asp-controller="BidangUsaha" class='nav-link @(ViewBag.Title == "Bidang Usaha" ? "active" : "")' data-key="t-bidang-usaha"> Bidang Usaha </a>
                             </li>
                             <li class="nav-item">

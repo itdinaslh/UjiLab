@@ -4,6 +4,9 @@ using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using UjiLab.Domain.Repositories;
+using UjiLab.Domain.Services;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,21 @@ string conn = builder.Configuration.GetConnectionString("AppDB");
 services.AddDbContext<AppDbContext>(options => {
     options.UseMySql(conn, ServerVersion.AutoDetect(conn));
 });
+
+// Add Service to DI Container
+{
+    services.AddScoped<IWilayah, WilayahService>();
+    services.AddScoped<IKondisi, KondisiService>();
+    services.AddScoped<ILayanan, LayananService>();
+    services.AddScoped<IBidangUsaha, BidangUsahaService>();
+    services.AddScoped<IMetodeSampling, MetodeSamplingService>();
+    services.AddScoped<ITipeUsaha, TipeUsahaService>();
+    services.AddScoped<IStatus, StatusService>();
+    services.AddScoped<ITipePengajuan, TipePengajuanService>();
+    services.AddScoped<IOutputHasil, OutputHasilService>();
+    services.AddScoped<IClient, ClientService>();
+    services.AddScoped<IBakuMutu, BakuMutuService>();
+}
 
 services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -51,7 +69,7 @@ services.AddAuthentication(options => {
     options.Scope.Add("email");
     options.Scope.Add("roles");
     options.Scope.Add("profile");
-    options.Scope.Add("api1");
+    
 
     // Disable the built-in JWT claims mapping feature.
     options.MapInboundClaims = false;
@@ -80,6 +98,18 @@ app.UseCors(x => x
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(@"C:\Data\clients"),
+    RequestPath = new PathString("/clients")
+});
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(@"C:\Data\thumbnails"),
+    RequestPath = new PathString("/thumbnails")
+});
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -88,3 +118,14 @@ app.UseAuthorization();
 app.MapDefaultControllerRoute();
 
 app.Run();
+
+public static class Simpanan
+{
+    public const string ReturnUrl =  "https://localhost:7145/dashboard";
+    public const string AuthServer = "https://localhost:6001/Identity/Account/RegisterLLHD/?returnUrl=";
+}
+
+public static class Uploads
+{
+    public const string Path = @"C:\Data";
+}
