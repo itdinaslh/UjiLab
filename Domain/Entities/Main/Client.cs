@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("clients")]
+[Table("Clients")]
 public class Client
 {
     [Key]
@@ -61,24 +61,15 @@ public class Client
     public string TelpPIC { get; set; }
 
     [DataType(DataType.Text)]    
-    public string KtpPath { get; set; } = string.Empty;
-
-    [DataType(DataType.Text)]
-    public string RealKtpPath { get; set; } = string.Empty;
+    public string FileKTP { get; set; } = string.Empty;
 
     [DataType(DataType.Text)]    
-    public string SuratKuasaPath { get; set; } = string.Empty;
-
-    [DataType(DataType.Text)]
-    public string RealSuratKuasaPath { get; set; } = string.Empty;
+    public string FileSuratKuasa { get; set; } = string.Empty;
 
 #nullable enable
 
     [DataType(DataType.Text)]    
-    public string? DokumenIzinPath { get; set; }
-
-    [DataType(DataType.Text)]
-    public string? RealDokumenIzinPath { get; set; }
+    public string? FileIzin { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
@@ -97,5 +88,10 @@ public class Client
     public Kelurahan Kelurahan { get; set; }
 
     public Status Status { get; set; }
+
+#nullable enable
+
+    [MaxLength(100)]
+    public string? Keterangan { get; set; }
 
 }

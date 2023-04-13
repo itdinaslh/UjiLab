@@ -11,4 +11,11 @@ public class TransactionController : Controller
     {
         return View();
     }
+
+    [Authorize(Roles = "LabClient")]
+    [HttpGet("/transaction/clients/create")]
+    public IActionResult ClientAddTrans()
+    {
+        return View();
+    }
 }

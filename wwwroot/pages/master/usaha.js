@@ -24,9 +24,15 @@ function loadTable() {
             {
                 data: 'bidangUsahaID',
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/bidang-usaha/edit/?bidangUsahaID="
-                        + row.bidangUsahaID + "'><i class='fa fa-edit'></i> Edit</button>";
-                }
+                    return "<button class='btn btn-sm btn-success mr-2 showMe' data-href='/master/bidang-usaha/edit/?bidangUsahaID="
+                        + row.bidangUsahaID + "'><i class='ri-edit-box-line'></i></button>";
+                },
+            }
+        ],
+        columnDefs: [
+            {
+                targets: [0, 2],
+                className: 'text-center'
             }
         ],
         order: [[0, "desc"]]

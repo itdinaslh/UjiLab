@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("provinsi")]
+[Table("Provinsi")]
 public class Provinsi
 {
 #nullable disable

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using UjiLab.Data;
 
 #nullable disable
@@ -17,149 +18,180 @@ namespace UjiLab.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.12")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("UjiLab.Domain.Entities.BakuMutu", b =>
                 {
-                    b.Property<int>("BakuMutuID")
+                    b.Property<long>("BakuMutuID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("BakuMutuID"));
+
+                    b.Property<double>("BiayaAlat")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("BiayaUji")
+                        .HasColumnType("double precision");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("NamaBakuMutu")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(75)
+                        .HasColumnType("character varying(75)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("JenisBakuMutuID")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("MetodeParameterID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NilaiBakuMutu")
+                        .HasColumnType("text");
 
                     b.Property<int>("OutputHasilID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ParameterID")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(75)
+                        .HasColumnType("character varying(75)");
 
                     b.HasKey("BakuMutuID");
 
+                    b.HasIndex("JenisBakuMutuID");
+
+                    b.HasIndex("MetodeParameterID");
+
                     b.HasIndex("OutputHasilID");
 
-                    b.ToTable("baku_mutu");
+                    b.HasIndex("ParameterID");
+
+                    b.ToTable("BakuMutu");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.BidangUsaha", b =>
                 {
                     b.Property<int>("BidangUsahaID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BidangUsahaID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaBidangUsaha")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("BidangUsahaID");
 
-                    b.ToTable("bidangusaha");
+                    b.ToTable("BidangUsaha");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Client", b =>
                 {
                     b.Property<Guid>("ClientID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Alamat")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<int>("BidangUsahaID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DokumenIzinPath")
-                        .HasColumnType("longtext");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("EmailPIC")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("FileIzin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileKTP")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileSuratKuasa")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("KelurahanID")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("character varying(15)");
 
-                    b.Property<string>("KtpPath")
-                        .HasColumnType("longtext");
+                    b.Property<string>("Keterangan")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("NIK")
                         .IsRequired()
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("character varying(16)");
 
                     b.Property<string>("NamaClient")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("NamaPIC")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<string>("PosisiPIC")
                         .IsRequired()
                         .HasMaxLength(75)
-                        .HasColumnType("varchar(75)");
-
-                    b.Property<string>("RealDokumenIzinPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RealKtpPath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RealSuratKuasaPath")
-                        .HasColumnType("longtext");
+                        .HasColumnType("character varying(75)");
 
                     b.Property<int>("StatusID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SuratKuasaPath")
-                        .HasColumnType("longtext");
+                        .HasColumnType("integer");
 
                     b.Property<string>("TelpPIC")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<int>("TipeUsahaID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserID")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uuid");
 
                     b.HasKey("ClientID");
 
@@ -171,363 +203,509 @@ namespace UjiLab.Migrations
 
                     b.HasIndex("TipeUsahaID");
 
-                    b.ToTable("clients");
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("UjiLab.Domain.Entities.JenisBakuMutu", b =>
+                {
+                    b.Property<int>("JenisBakuMutuID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("JenisBakuMutuID"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NamaJenis")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("JenisBakuMutuID");
+
+                    b.ToTable("JenisBakuMutu");
+                });
+
+            modelBuilder.Entity("UjiLab.Domain.Entities.JenisParameter", b =>
+                {
+                    b.Property<int>("JenisParameterID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("JenisParameterID"));
+
+                    b.Property<string>("NamaJenis")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.HasKey("JenisParameterID");
+
+                    b.ToTable("JenisParameter");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.JenisPengajuan", b =>
                 {
                     b.Property<int>("JenisPengajuanID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("JenisPengajuanID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaJenis")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("JenisPengajuanID");
 
-                    b.ToTable("jenis_pengajuan");
+                    b.ToTable("JenisPengajuan");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Kabupaten", b =>
                 {
                     b.Property<string>("KabupatenID")
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("character varying(10)");
 
                     b.Property<bool>("IsKota")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("Longitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("NamaKabupaten")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("ProvinsiID")
                         .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("character varying(5)");
 
                     b.HasKey("KabupatenID");
 
                     b.HasIndex("ProvinsiID");
 
-                    b.ToTable("kabupaten");
+                    b.ToTable("Kabupaten");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Kecamatan", b =>
                 {
                     b.Property<string>("KecamatanID")
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("character varying(10)");
 
                     b.Property<string>("KabupatenID")
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("character varying(10)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("Longitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("NamaKecamatan")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
 
                     b.HasKey("KecamatanID");
 
                     b.HasIndex("KabupatenID");
 
-                    b.ToTable("kecamatan");
+                    b.ToTable("Kecamatan");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Kelurahan", b =>
                 {
                     b.Property<string>("KelurahanID")
                         .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("KecamatanID")
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("character varying(10)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("Longitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("NamaKelurahan")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("character varying(150)");
 
                     b.HasKey("KelurahanID");
 
                     b.HasIndex("KecamatanID");
 
-                    b.ToTable("kelurahan");
+                    b.ToTable("Kelurahan");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Kondisi", b =>
                 {
                     b.Property<int>("KondisiID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("KondisiID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaKondisi")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("KondisiID");
 
-                    b.ToTable("kondisi");
+                    b.ToTable("Kondisi");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Layanan", b =>
                 {
                     b.Property<int>("LayananID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LayananID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaLayanan")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("LayananID");
 
-                    b.ToTable("layanan");
+                    b.ToTable("Layanan");
+                });
+
+            modelBuilder.Entity("UjiLab.Domain.Entities.MetodeParameter", b =>
+                {
+                    b.Property<int>("MetodeParameterID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MetodeParameterID"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NamaMetode")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("MetodeParameterID");
+
+                    b.ToTable("MetodeParameter");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.MetodeSampling", b =>
                 {
                     b.Property<int>("MetodeSamplingID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MetodeSamplingID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Deskripsi")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Kode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<string>("NamaMetode")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("MetodeSamplingID");
 
-                    b.ToTable("MetodeSamplings");
+                    b.ToTable("MetodeSampling");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.OutputHasil", b =>
                 {
                     b.Property<int>("OutputHasilID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OutputHasilID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Kode")
+                        .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<string>("OutputName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("TipePengajuanID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("OutputHasilID");
 
                     b.HasIndex("TipePengajuanID");
 
-                    b.ToTable("output_hasil");
+                    b.ToTable("OutputHasil");
+                });
+
+            modelBuilder.Entity("UjiLab.Domain.Entities.Parameter", b =>
+                {
+                    b.Property<int>("ParameterID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ParameterID"));
+
+                    b.Property<double?>("BiayaAlat")
+                        .HasColumnType("double precision");
+
+                    b.Property<double?>("BiayaUji")
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("JenisParameterID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NamaParameter")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Satuan")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("ParameterID");
+
+                    b.HasIndex("JenisParameterID");
+
+                    b.ToTable("Parameter");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Provinsi", b =>
                 {
                     b.Property<string>("ProvinsiID")
                         .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("character varying(5)");
 
                     b.Property<string>("HcKey")
                         .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("character varying(20)");
 
                     b.Property<string>("KodeNegara")
                         .IsRequired()
                         .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("character varying(5)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("Longitude")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("NamaProvinsi")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("ProvinsiID");
 
-                    b.ToTable("provinsi");
+                    b.ToTable("Provinsi");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Status", b =>
                 {
                     b.Property<int>("StatusID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StatusID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("StatusName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("StatusID");
 
-                    b.ToTable("statuses");
+                    b.ToTable("Status");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.TipeLokasi", b =>
                 {
                     b.Property<int>("TipeLokasiID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipeLokasiID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaTipe")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("TipeLokasiID");
 
-                    b.ToTable("tipe_lokasi");
+                    b.ToTable("TipeLokasi");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.TipePengajuan", b =>
                 {
                     b.Property<int>("TipePengajuanID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipePengajuanID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("JenisPengajuanID")
-                        .HasColumnType("int");
+                    b.Property<int>("JenisPengajuanID")
+                        .HasColumnType("integer");
 
                     b.Property<string>("NamaTipe")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("TipePengajuanID");
 
                     b.HasIndex("JenisPengajuanID");
 
-                    b.ToTable("tipe_pengajuan");
+                    b.ToTable("TipePengajuan");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.TipeUsaha", b =>
                 {
                     b.Property<int>("TipeUsahaID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipeUsahaID"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NamaTipe")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("TipeUsahaID");
 
-                    b.ToTable("tipeusaha");
+                    b.ToTable("TipeUsaha");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.BakuMutu", b =>
                 {
+                    b.HasOne("UjiLab.Domain.Entities.JenisBakuMutu", "JenisBakuMutu")
+                        .WithMany()
+                        .HasForeignKey("JenisBakuMutuID");
+
+                    b.HasOne("UjiLab.Domain.Entities.MetodeParameter", "MetodeParameter")
+                        .WithMany()
+                        .HasForeignKey("MetodeParameterID");
+
                     b.HasOne("UjiLab.Domain.Entities.OutputHasil", "OutputHasil")
                         .WithMany("BakuMutus")
                         .HasForeignKey("OutputHasilID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("UjiLab.Domain.Entities.Parameter", "Parameter")
+                        .WithMany()
+                        .HasForeignKey("ParameterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JenisBakuMutu");
+
+                    b.Navigation("MetodeParameter");
+
                     b.Navigation("OutputHasil");
+
+                    b.Navigation("Parameter");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.Client", b =>
@@ -603,11 +781,24 @@ namespace UjiLab.Migrations
                     b.Navigation("TipePengajuan");
                 });
 
+            modelBuilder.Entity("UjiLab.Domain.Entities.Parameter", b =>
+                {
+                    b.HasOne("UjiLab.Domain.Entities.JenisParameter", "JenisParameter")
+                        .WithMany("Parameters")
+                        .HasForeignKey("JenisParameterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JenisParameter");
+                });
+
             modelBuilder.Entity("UjiLab.Domain.Entities.TipePengajuan", b =>
                 {
                     b.HasOne("UjiLab.Domain.Entities.JenisPengajuan", "JenisPengajuan")
                         .WithMany("TipePengajuans")
-                        .HasForeignKey("JenisPengajuanID");
+                        .HasForeignKey("JenisPengajuanID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("JenisPengajuan");
                 });
@@ -615,6 +806,11 @@ namespace UjiLab.Migrations
             modelBuilder.Entity("UjiLab.Domain.Entities.BidangUsaha", b =>
                 {
                     b.Navigation("Clients");
+                });
+
+            modelBuilder.Entity("UjiLab.Domain.Entities.JenisParameter", b =>
+                {
+                    b.Navigation("Parameters");
                 });
 
             modelBuilder.Entity("UjiLab.Domain.Entities.JenisPengajuan", b =>

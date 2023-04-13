@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("output_hasil")]
+[Table("OutputHasil")]
 public class OutputHasil
 {
     [Key]

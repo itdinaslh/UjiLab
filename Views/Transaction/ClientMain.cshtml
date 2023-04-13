@@ -1,0 +1,136 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Data Pengajuan Uji Coba</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group mb-3">
+                            <label>Tanggal Pengajuan</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Tanggal Penyerahan Contoh <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card bg-success card-height-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-todo-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Biaya Uji</p>
+                                                <h4 class="fs-4 mb-3 text-white"><span>Rp 350.000</span></h4>
+                                                <p class="text-white mb-0">Estimasi total biaya uji</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card bg-primary card-height-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-flask-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Biaya Alat</p>
+                                                <h4 class="fs-4 mb-3 text-white"><span>Rp 100.000</span></h4>
+                                                <p class="text-white mb-0">Estimasi total biaya alat</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card bg-danger card-height-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-price-tag-2-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Total Biaya</p>
+                                                <h4 class="fs-4 mb-3 text-white"><span>Rp 450.000</span></h4>
+                                                <p class="text-white mb-0">Estimasi total biaya keseluruhan</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Contoh Uji</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" class="btn btn-primary btn-sm" x-on:click="modul = 2">Tambah</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>No. Contoh Uji</th>
+                                <th>Nama Contoh Uji</th>
+                                <th>Tipe Lokasi</th>
+                                <th>Waktu Sampling</th>
+                                <th>Output Hasil</th>
+                                <th>Estimasi Biaya Uji</th>
+                                <th>Estimasi Biaya Alat</th>
+                                <th>Status Pengujian</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="9" class="text-center">Belum Ada Data</td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Biaya Uji : Rp. 0</td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Biaya Alat : Rp. 0</td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Keseluruhan : Rp. 0</td>
+                            </tr>
+                        </tbody>                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,11 +24,18 @@ function loadTable() {
             { data: 'kode', name: 'kode', autowidth: true },
             { data: 'deskripsi', name: 'deskripsi', autowidth: true },
             {
-                data: 'metodeSamplingID',
+                data: 'metodeSamplingID',                
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/metode-sampling/edit/?metodeSamplingID="
-                        + row.layananID + "'><i class='fa fa-edit'></i> Edit</button>";
-                }
+                    return "<button class='btn btn-sm btn-success mr-2 showMe' data-href='/master/metode-sampling/edit/?metodeSamplingID="
+                        + row.metodeSamplingID + "'><i class='ri-edit-box-line'></i></button>";
+                },
+                orderable: false
+            }
+        ],
+        columnDefs: [
+            {
+                targets: [0, 4],
+                className: 'text-center'
             }
         ],
         order: [[0, "desc"]]

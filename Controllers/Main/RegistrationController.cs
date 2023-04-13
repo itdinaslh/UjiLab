@@ -47,19 +47,8 @@ public class RegistrationController : Controller
         string extSurat = Path.GetExtension(reg.SuratKuasa.FileName);
         string fileNameSurat = GenerateRandomString() + extSurat;
 
-        reg.Client.RealKtpPath = "/clients/" + uid + "/" + fileNameKTP;
-
-        if (!extKtp.Contains("pdf"))
-            reg.Client.KtpPath = "/clients/" + uid + "/thumbnails/" + fileNameKTP;
-        else
-            reg.Client.KtpPath = "/img/pdf.jpg";
-
-        reg.Client.RealSuratKuasaPath = "/clients/" + uid + "/" + fileNameSurat;
-
-        if (!extSurat.Contains("pdf"))
-            reg.Client.SuratKuasaPath = "/clients/" + uid + "/thumbnails/" + fileNameSurat;
-        else
-            reg.Client.SuratKuasaPath = "/img/pdf.jpg";
+        reg.Client.FileKTP = fileNameKTP;
+        reg.Client.FileSuratKuasa = fileNameSurat;
 
         // Upload KTP File First
         using (FileStream stream = new(Path.Combine(path, fileNameKTP), FileMode.Create))
@@ -103,15 +92,10 @@ public class RegistrationController : Controller
 
         if (reg.Izin is not null)
         {
-            string extIzin = Path.GetExtension(reg.KTP.FileName);
+            string extIzin = Path.GetExtension(reg.Izin.FileName);
             string fileNameIzin = GenerateRandomString() + extIzin;
 
-            reg.Client.RealDokumenIzinPath = "/clients/" + uid + "/" + fileNameIzin;
-
-            if (!extIzin.Contains("pdf"))
-                reg.Client.DokumenIzinPath = "/clients/" + uid + "/thumbnails/" + fileNameIzin;
-            else
-                reg.Client.DokumenIzinPath = "/img/pdf.jpg";
+            reg.Client.FileIzin = fileNameIzin;            
 
             // Upload dokumen izin
             using (FileStream stream = new(Path.Combine(path, fileNameIzin), FileMode.Create))
@@ -146,8 +130,6 @@ public class RegistrationController : Controller
 
             return RedirectToAction("Dashboard", "Home");
         }
-
-        
 
         return View("~/Views/Registration/Index.cshtml", reg);
     }

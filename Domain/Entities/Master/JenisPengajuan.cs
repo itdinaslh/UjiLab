@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("jenis_pengajuan")]
+[Table("JenisPengajuan")]
 public class JenisPengajuan
 {
     [Key]

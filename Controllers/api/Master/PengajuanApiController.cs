@@ -10,8 +10,9 @@ namespace UjiLab.Controllers.api;
 public class PengajuanApiController : ControllerBase
 {
     private readonly ITipePengajuan repo;
+    private readonly IJenisPengajuan jRepo;
 
-    public PengajuanApiController(ITipePengajuan repo) { this.repo = repo; }
+    public PengajuanApiController(ITipePengajuan repo, IJenisPengajuan jRepo) { this.repo = repo; this.jRepo = jRepo; }
 
     [HttpPost("/api/master/pengajuan/tipe")]
     public async Task<IActionResult> TipeDataTable()
@@ -57,12 +58,41 @@ public class PengajuanApiController : ControllerBase
     [HttpGet("/api/master/pengajuan/tipe/search")]
     public async Task<IActionResult> SearchTipe(string? term)
     {
-        var data = await repo.TipePengajuans
+        var data = await repo.TipePengajuans            
             .Where(k => !String.IsNullOrEmpty(term) ?
                 k.NamaTipe.ToLower().Contains(term.ToLower()) : true
             ).Select(s => new {
                 id = s.TipePengajuanID,
                 data = s.NamaTipe
+            }).ToListAsync();
+
+        return Ok(data);
+    }
+
+    [HttpGet("/api/master/pengajuan/tipe/searchbyjenis")]
+    public async Task<IActionResult> SearchTipeByJenis(int jenis, string? term)
+    {
+        var data = await repo.TipePengajuans
+            .Where(j => j.JenisPengajuanID == jenis)
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.NamaTipe.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.TipePengajuanID,
+                data = s.NamaTipe
+            }).ToListAsync();
+
+        return Ok(data);
+    }
+
+    [HttpGet("/api/master/pengajuan/jenis/search")]
+    public async Task<IActionResult> SearchJenis(int jenis, string? term)
+    {
+        var data = await jRepo.JenisPengajuans            
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.NamaJenis.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.JenisPengajuanID,
+                data = s.NamaJenis
             }).ToListAsync();
 
         return Ok(data);

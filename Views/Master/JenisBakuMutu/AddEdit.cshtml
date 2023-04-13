@@ -1,0 +1,27 @@
+﻿@model JenisBakuMutu
+
+<form asp-action="StoreJenis" asp-controller="BakuMutu" method="post">
+    <div class="modal-header">
+        @if (Model.JenisBakuMutuID != 0)
+        {
+                <h5 class="model-title">Edit Master Jenis Baku Mutu</h5>
+        }
+        else
+        {
+                <h5 class="modal-title">Tambah Master Jenis Baku Mutu</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="JenisBakuMutuID">
+        <div class="form-group mb-3">
+            <label>Nama Jenis Baku Mutu</label>
+            <input type="text" asp-for="NamaJenis" class="form-control" autofocus autocomplete="off" />
+            <span asp-validation-for="NamaJenis" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

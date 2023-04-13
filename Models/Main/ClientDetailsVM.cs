@@ -1,9 +1,12 @@
-﻿namespace UjiLab.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace UjiLab.Models;
 
 public class ClientDetailsVM
 {
 
 #nullable disable
+    public Guid ClientID { get; set; }
 
     public string Email { get; set; }
 
@@ -42,6 +45,11 @@ public class ClientDetailsVM
     public string SuratKuasaPath { get; set; }
 
     public string RealSuratKuasaPath { get; set; }
+
+    [Required(ErrorMessage = "Silahkan pilih status")]
+    public int StatusID { get; set; }
+
+    public string Keterangan { get; set; }
 
 #nullable enable
 

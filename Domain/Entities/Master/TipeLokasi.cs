@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("tipe_lokasi")]
+[Table("TipeLokasi")]
 public class TipeLokasi
 {
 #nullable disable

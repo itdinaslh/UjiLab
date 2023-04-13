@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("tipe_pengajuan")]
+[Table("TipePengajuan")]
 public class TipePengajuan
 {
 

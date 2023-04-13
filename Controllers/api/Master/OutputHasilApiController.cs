@@ -52,5 +52,34 @@ public class OutputHasilApiController : ControllerBase
         var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = result };
 
         return Ok(jsonData);
-    }    
+    }
+
+    [HttpGet("/api/master/output-hasil/searchbytipe")]
+    public async Task<IActionResult> SearchOutputByTipe(int tipe, string? term)
+    {
+        var data = await repo.OutputHasils
+            .Where(j => j.TipePengajuanID == tipe)
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.OutputName.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.OutputHasilID,
+                data = s.Kode + " - " + s.OutputName
+            }).ToListAsync();
+
+        return Ok(data);
+    }
+
+    [HttpGet("/api/master/output-hasil/search")]
+    public async Task<IActionResult> Search(string? term)
+    {
+        var data = await repo.OutputHasils            
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.OutputName.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.OutputHasilID,
+                data = s.Kode + " - " + s.OutputName
+            }).ToListAsync();
+
+        return Ok(data);
+    }
 }

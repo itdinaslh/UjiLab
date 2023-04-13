@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("layanan")]
+[Table("Layanan")]
 public class Layanan
 {
     [Key]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("kelurahan")]
+[Table("Kelurahan")]
 public class Kelurahan {
 #nullable disable
     [MaxLength(15, ErrorMessage = "Maksimal 15 Karakter")]

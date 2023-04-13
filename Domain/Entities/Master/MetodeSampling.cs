@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("metodesamplings")]
+[Table("MetodeSampling")]
 public class MetodeSampling
 {
     public int MetodeSamplingID { get; set; }

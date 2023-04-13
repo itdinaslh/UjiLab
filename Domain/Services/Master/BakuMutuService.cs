@@ -12,7 +12,9 @@ public class BakuMutuService : IBakuMutu
 
     public IQueryable<BakuMutu> BakuMutus => context.BakuMutus;
 
-    public async Task SaveDataAsync(BakuMutu mutu)
+    public IQueryable<JenisBakuMutu> JenisBakuMutus => context.JenisBakuMutus;
+
+    public async Task SaveBakuMutuAsync(BakuMutu mutu)
     {
         if (mutu.BakuMutuID == 0)
         {
@@ -23,10 +25,37 @@ public class BakuMutuService : IBakuMutu
 
             if (data is not null)
             {
-                data.NamaBakuMutu = mutu.NamaBakuMutu;
                 data.OutputHasilID = mutu.OutputHasilID;
+                data.ParameterID = mutu.ParameterID;
+                data.MetodeParameterID = mutu.MetodeParameterID;
+                data.JenisBakuMutuID = mutu.JenisBakuMutuID;
+                data.BiayaUji = mutu.BiayaUji;
+                data.BiayaAlat = mutu.BiayaAlat;
+                data.IsActive = mutu.IsActive;
+                data.UpdatedBy = mutu.UpdatedBy;
+                data.UpdatedAt = DateTime.Now;
 
-                context.BakuMutus.Update(mutu);
+                context.BakuMutus.Update(data);
+            }
+        }
+
+        await context.SaveChangesAsync();
+    }
+
+    public async Task SaveJenisAsync(JenisBakuMutu jenis)
+    {
+        if (jenis.JenisBakuMutuID == 0) 
+        {
+            await context.JenisBakuMutus.AddAsync(jenis);
+        } else
+        {
+            JenisBakuMutu? data = await context.JenisBakuMutus.FindAsync(jenis.JenisBakuMutuID);
+
+            if (data is not null)
+            {
+                data.NamaJenis = jenis.NamaJenis;
+
+                context.JenisBakuMutus.Update(data);
             }
         }
 

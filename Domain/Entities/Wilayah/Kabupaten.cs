@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UjiLab.Domain.Entities;
 
-[Table("kabupaten")]
+[Table("Kabupaten")]
 public class Kabupaten {
 #nullable disable
     [Key]

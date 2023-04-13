@@ -34,8 +34,14 @@ public class BakuMutuApiController : ControllerBase
 
         var init = repo.BakuMutus.Select(x => new {
             bakuMutuID = x.BakuMutuID,
-            namaBakuMutu = x.NamaBakuMutu,
-            outputName = x.OutputHasil.OutputName
+            jenisPengajuan = x.OutputHasil.TipePengajuan.JenisPengajuan.NamaJenis,
+            tipePengajuan = x.OutputHasil.TipePengajuan.NamaTipe,
+            outputHasil = x.OutputHasil.Kode + " - " + x.OutputHasil.OutputName,
+            metodeParameter = x.MetodeParameter!.NamaMetode,
+            jenisBakuMutu = x.JenisBakuMutu!.NamaJenis,
+            parameter = x.Parameter.NamaParameter,
+            biayaUji = x.BiayaUji == 0 ? "0" : x.BiayaUji.ToString("#,###"),
+            biayaAlat = x.BiayaAlat == 0 ? "0" :  x.BiayaAlat.ToString("#,###")
         });
 
         if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
@@ -45,7 +51,7 @@ public class BakuMutuApiController : ControllerBase
 
         if (!string.IsNullOrEmpty(searchValue))
         {
-            init = init.Where(a => a.namaBakuMutu.ToLower().Contains(searchValue.ToLower()));
+            init = init.Where(a => a.jenisBakuMutu.ToLower().Contains(searchValue.ToLower()));
         }
 
         recordsTotal = init.Count();
@@ -55,5 +61,54 @@ public class BakuMutuApiController : ControllerBase
         var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = result };
 
         return Ok(jsonData);
+    }
+
+    [HttpPost("/api/master/baku-mutu/jenis")]
+    [Authorize]
+    public async Task<IActionResult> JenisBakuMutuTable()
+    {
+        var draw = Request.Form["draw"].FirstOrDefault();
+        var start = Request.Form["start"].FirstOrDefault();
+        var length = Request.Form["length"].FirstOrDefault();
+        var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+        var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+        var searchValue = Request.Form["search[value]"].FirstOrDefault();
+        int pageSize = length != null ? Convert.ToInt32(length) : 0;
+        int skip = start != null ? Convert.ToInt32(start) : 0;
+        int recordsTotal = 0;
+
+        var init = repo.JenisBakuMutus;
+
+        if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+        {
+            init = init.OrderBy(sortColumn + " " + sortColumnDirection);
+        }
+
+        if (!string.IsNullOrEmpty(searchValue))
+        {
+            init = init.Where(a => a.NamaJenis.ToLower().Contains(searchValue.ToLower()));
+        }
+
+        recordsTotal = init.Count();
+
+        var result = await init.Skip(skip).Take(pageSize).ToListAsync();
+
+        var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = result };
+
+        return Ok(jsonData);
+    }
+
+    [HttpGet("/api/master/baku-mutu/jenis/search")]
+    public async Task<IActionResult> SearchJenis(string? term)
+    {
+        var data = await repo.JenisBakuMutus
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.NamaJenis.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.JenisBakuMutuID,
+                data = s.NamaJenis
+            }).ToListAsync();
+
+        return Ok(data);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using UjiLab.Domain.Entities;
 using UjiLab.Domain.Repositories;
 using UjiLab.Models;
+using UjiLab.Helpers;
 
 namespace UjiLab.Controllers;
 
@@ -36,6 +37,7 @@ public class ClientController : Controller
         {
             ClientDetailsVM detail = new ClientDetailsVM
             {
+                ClientID = data!.ClientID,
                 Email = data!.Email,
                 Nama = data!.NamaClient,
                 TipeUsaha = data!.TipeUsaha.NamaTipe,
@@ -51,17 +53,31 @@ public class ClientController : Controller
                 NIK = data!.NIK,
                 PosisiPIC = data!.PosisiPIC,
                 TelpPIC = data!.TelpPIC,
-                KtpPath = data!.KtpPath,
-                RealKtpPath = data!.RealKtpPath,
-                SuratKuasaPath = data!.SuratKuasaPath,
-                RealSuratKuasaPath = data!.RealSuratKuasaPath,
-                IzinPath = data!.DokumenIzinPath,
-                RealIzinPath = data!.RealDokumenIzinPath
+                KtpPath = "/clients/" + data!.ClientID + "/thumbnails/" + data!.FileKTP,
+                RealKtpPath = "/clients/" + data!.ClientID + "/" + data.FileKTP,
+                SuratKuasaPath = "/clients/" + data!.ClientID + "/thumbnails/" + data!.FileSuratKuasa,
+                RealSuratKuasaPath = "/clients/" + data!.ClientID + "/" + data!.FileSuratKuasa,
+                IzinPath = "/clients/" + data!.ClientID + "/thumbnails/" + data!.FileIzin,
+                RealIzinPath = "/clients/" + data!.ClientID + "/" + data!.FileIzin
             };
 
             return View("~/Views/Client/Verify.cshtml", detail);
         }
 
         return NotFound();
+    }
+
+    [HttpPost("/clients/verify")]
+    [Authorize(Roles = "SysAdmin, LabAdmin")]
+    public async Task<IActionResult> Verify(ClientDetailsVM model)
+    {
+        if (ModelState.IsValid)
+        {
+            await repo.VerifyClient(model);
+
+            return Redirect("/clients/list");
+        }
+
+        return View("~/Views/Client/Verify.cshtml", model);
     }
 }

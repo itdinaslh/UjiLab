@@ -1,5 +1,7 @@
 function bindForm(dialog) {
-    $('form', dialog).submit(function () {
+    $('form', dialog).submit(function (e) {
+        e.preventDefault();
+
         $.ajax({
             url: this.action,
             type: this.method,

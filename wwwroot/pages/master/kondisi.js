@@ -22,11 +22,18 @@ function loadTable() {
             { data: 'kondisiID', name: 'kondisiID', autowidth: true },            
             { data: 'namaKondisi', name: 'namaKondisi', autowidth: true },
             {
-                data: 'kondisiID',
+                data: 'kondisiID',                
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/kondisi/edit/?kondisiID="
-                        + row.kondisiID + "'><i class='fa fa-edit'></i> Edit</button>";
-                }
+                    return "<button class='btn btn-sm btn-success mr-2 showMe' data-href='/master/kondisi/edit/?id="
+                        + row.kondisiID + "'><i class='ri-edit-box-line'></i></button>";
+                },
+                orderable: false,
+            }
+        ],
+        columnDefs: [
+            {
+                targets: [0, 2],
+                className: 'text-center'
             }
         ],
         order: [[0, "desc"]]

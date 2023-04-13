@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Transaksi Pengajuan";
+    ViewBag.Parent = "Transaction";
+}
+
+@section plugincss {    
+    @*select2*@
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
+    <script defer src="~/js/alpine.min.js"></script>
+    <link href="~/dist/assets/css/custom.css" rel="stylesheet" type="text/css" />
+}
+
+<div x-data="{ modul: 1 }">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">@ViewBag.Title</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Transaksi</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div x-show="modul == 1" x-transition>
+        <partial name="~/Views/Transaction/ClientMain.cshtml" />
+    </div>
+    <div x-show="modul == 2" x-transition>
+        <partial name="~/Views/Transaction/ClientDetailUji.cshtml" />
+    </div>
+</div>
+
+@section pluginjs {   
+    <script src="~/lib/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+}
+
+@section scripts {
+    <script src="~/pages/transactions/TransClientDetail.js"></script>
+}

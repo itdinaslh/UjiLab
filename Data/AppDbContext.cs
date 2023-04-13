@@ -27,6 +27,10 @@ public class AppDbContext : DbContext
     public DbSet<TipePengajuan> TipePengajuans { get; set; }
     public DbSet<OutputHasil> OutputHasils { get; set; }
     public DbSet<BakuMutu> BakuMutus { get; set; }
+    public DbSet<JenisParameter> JenisParameters { get; set; }
+    public DbSet<Parameter> Parameters { get; set; }
+    public DbSet<MetodeParameter> MetodeParameters { get; set; }
+    public DbSet<JenisBakuMutu> JenisBakuMutus { get; set; }
 
     // Main
     public DbSet<Client> Clients { get; set; }

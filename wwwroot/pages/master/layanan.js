@@ -22,11 +22,18 @@ function loadTable() {
             { data: 'layananID', name: 'layananID', autowidth: true },
             { data: 'namaLayanan', name: 'namaLayanan', autowidth: true },
             {
-                data: 'layananID',
+                data: 'layananID',                
                 render: function (data, type, row) {
-                    return "<button class='btn btn-sm btn-success mr-2 showMe' style='width:100%;' data-href='/master/layanan/edit/?layananID="
-                        + row.layananID + "'><i class='fa fa-edit'></i> Edit</button>";
-                }
+                    return "<button class='btn btn-sm btn-success mr-2 showMe' data-href='/master/layanan/edit/?id="
+                        + row.layananID + "'><i class='ri-edit-box-line'></i></button>";
+                },
+                orderable: false
+            }
+        ],
+        columnDefs: [
+            {
+                targets: [0, 2],
+                className: 'text-center'
             }
         ],
         order: [[0, "desc"]]

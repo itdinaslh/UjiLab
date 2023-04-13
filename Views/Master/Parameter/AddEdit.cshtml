@@ -1,0 +1,51 @@
+﻿@model ParameterVM
+
+<form asp-action="Store" asp-controller="Parameter" method="post">
+    <div class="modal-header">
+        @if (Model.Parameter.ParameterID != 0)
+        {
+            <h5 class="model-title">Edit Master Parameter</h5>
+        }
+        else
+        {
+            <h5 class="modal-title">Tambah Master Parameter</h5>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="Parameter.ParameterID">
+        <input type="hidden" asp-for="Parameter.BiayaUji" class="rBiayaUji" />
+        <input type="hidden" asp-for="Parameter.BiayaAlat" class="rBiayaAlat" />
+        <div class="form-group mb-3">
+            <label>Nama Parameter</label>
+            <input type="text" asp-for="Parameter.NamaParameter" class="form-control" autofocus autocomplete="off" required />
+            <span asp-validation-for="Parameter.NamaParameter" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label>Satuan</label>
+            <input type="text" asp-for="Parameter.Satuan" class="form-control" autocomplete="off" />            
+        </div>
+        <div class="form-group mb-3">
+            <label>Biaya Uji</label>
+            <input id="biayaUji" type="text" class="form-control autonumber" autocomplete="off" />
+        </div>
+        <div class="form-group">
+            <label>Biaya Alat</label>
+            <input id="biayaAlat" type="text" class="form-control autonumber" autocomplete="off" />
+        </div>
+        <div class="form-group mb-3">
+            <label>Jenis Parameter</label>
+            <select asp-for="Parameter.JenisParameterID" class="form-control sJenis" required>                
+                @foreach(var row in Model.JenisParameters)
+                {
+                    <option value="@row.JenisParameterID">@row.NamaJenis</option>
+                }
+            </select>
+            <span asp-validation-for="Parameter.JenisParameterID" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

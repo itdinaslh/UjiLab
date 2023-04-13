@@ -47,4 +47,18 @@ public class MetodeSamplingApiController : ControllerBase
 
         return Ok(jsonData);
     }
+
+    [HttpGet("/api/master/metode-sampling/search")]
+    public async Task<IActionResult> SearchMetode(string? term)
+    {
+        var data = await repo.MetodeSamplings            
+            .Where(k => !String.IsNullOrEmpty(term) ?
+                k.NamaMetode.ToLower().Contains(term.ToLower()) : true
+            ).Select(s => new {
+                id = s.MetodeSamplingID,
+                data = s.NamaMetode + " : " + s.Kode + " - " + s.Deskripsi
+            }).ToListAsync();
+
+        return Ok(data);
+    }
 }
