@@ -18,10 +18,14 @@ var services = builder.Services;
 // Add CoRS
 services.AddCors();
 
-string conn = builder.Configuration.GetConnectionString("AppDB");
+//string conn = builder.Configuration.GetConnectionString("AppDB");
+
+//services.AddDbContext<AppDbContext>(options => {
+//    options.UseMySql(conn, ServerVersion.AutoDetect(conn));
+//});
 
 services.AddDbContext<AppDbContext>(options => {
-    options.UseMySql(conn, ServerVersion.AutoDetect(conn));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreDB"));
 });
 
 // Add Service to DI Container
@@ -37,6 +41,9 @@ services.AddDbContext<AppDbContext>(options => {
     services.AddScoped<IOutputHasil, OutputHasilService>();
     services.AddScoped<IClient, ClientService>();
     services.AddScoped<IBakuMutu, BakuMutuService>();
+    services.AddScoped<IParameter, ParameterService>();
+    services.AddScoped<IJenisPengajuan, JenisPengajuanService>();
+    services.AddScoped<ITipeLokasi, TipeLokasiService>();
 }
 
 services.AddAuthentication(options => {
@@ -45,7 +52,7 @@ services.AddAuthentication(options => {
 
 .AddCookie(options => {
     options.LoginPath = "/login";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
     options.SlidingExpiration = false;
     options.AccessDeniedPath = "/account/denied";
 })
@@ -81,6 +88,8 @@ services.AddAuthentication(options => {
 
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -102,12 +111,6 @@ app.UseStaticFiles(new StaticFileOptions()
 {
     FileProvider = new PhysicalFileProvider(@"C:\Data\clients"),
     RequestPath = new PathString("/clients")
-});
-
-app.UseStaticFiles(new StaticFileOptions()
-{
-    FileProvider = new PhysicalFileProvider(@"C:\Data\thumbnails"),
-    RequestPath = new PathString("/thumbnails")
 });
 
 app.UseRouting();
