@@ -7,6 +7,10 @@
     PopulateTipeLokasi();
 });
 
+$('.datepick').flatpickr({
+    dateFormat: 'd-m-Y',
+    position: 'below'
+});
 
 function PopulateJenisPengajuan() {
     $('.sJenisPengajuan').select2({

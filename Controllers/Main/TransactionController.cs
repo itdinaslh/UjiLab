@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UjiLab.Models;
 
 namespace UjiLab.Controllers;
 
@@ -16,6 +17,6 @@ public class TransactionController : Controller
     [HttpGet("/transaction/clients/create")]
     public IActionResult ClientAddTrans()
     {
-        return View();
+        return View(new TransCreateVM());
     }
 }
