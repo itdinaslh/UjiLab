@@ -129,10 +129,8 @@ public class BakuMutuApiController : ControllerBase
                 x.Parameter.NamaParameter,
                 satuan = x.Parameter.Satuan ?? "",
                 namaMetode = x.MetodeParameter!.NamaMetode ?? "",
-                x.BiayaUji,
-                biayaUjiStr = x.BiayaUji.ToString("Rp #,###"),
-                x.BiayaAlat,
-                biayaAlatStr = x.BiayaAlat == 0 ? "Rp 0" : x.BiayaAlat.ToString("Rp #,###"),
+                x.BiayaUji,                
+                x.BiayaAlat,                
                 x.IsActive, 
                 selected = true
             })

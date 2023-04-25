@@ -1,7 +1,10 @@
 ﻿var baku = '';
-var tblNum = 1;
+var tblNum = 0;
 var totalBiayaUji = 0;
 var totalBiayaAlat = 0;
+var uji = [];
+var allBiayaUji = 0;
+var allBiayaAlat = 0;
 
 $(document).ready(function () {
     PopulateJenisPengajuan();
@@ -20,6 +23,14 @@ $(document).ready(function () {
 
 $('.datepick').flatpickr({
     dateFormat: 'd-m-Y',
+    position: 'below'
+});
+
+$('.timepick').flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
     position: 'below'
 });
 
@@ -61,7 +72,7 @@ function PopulateTipePengajuan(jenis) {
         placeholder: 'Pilih tipe pengajuan...',
         allowClear: true,
         ajax: {
-            url: "/api/master/pengajuan/tipe/search?jenis=" + jenis,
+            url: "/api/master/pengajuan/tipe/searchbyjenis?jenis=" + jenis,
             contentType: "application/json; charset=utf-8",
             data: function (params) {
                 var query = {
@@ -226,7 +237,7 @@ function drawTable(data) {
     var trHTML = ''; var trFoot = '';
 
     $.each(data, function (i, item) {
-        trHTML += '<tr id="row' + tblNum + '"><td class="text-center">' + tblNum + '</td><td class="text-center">'
+        trHTML += '<tr id="row' + tblNum + '"><td class="text-center">' + (tblNum + 1) + '</td><td class="text-center">'
             + item.namaParameter + '</td><td class="text-center">' + item.satuan + '</td><td class="text-center">'
             + item.namaMetode + '</td><td class="text-center">' + 'Rp ' + item.biayaUji.toLocaleString('id-ID')
             + '</td><td class="text-center">' + 'Rp ' + item.biayaAlat.toLocaleString('id-ID')
@@ -239,9 +250,9 @@ function drawTable(data) {
         tblNum += 1;
     });
 
-    trFoot += '<tr><td colspan="7" class="text-end">Total Biaya Uji : Rp ' + totalBiayaUji.toLocaleString('id-ID');
-    trFoot += '<tr><td colspan="7" class="text-end">Total Biaya Alat : Rp ' + totalBiayaAlat.toLocaleString('id-ID');
-    trFoot += '<tr><td colspan="7" class="text-end">Total Keseluruhan : Rp ' + (totalBiayaUji + totalBiayaAlat).toLocaleString('id-ID');
+    trFoot += '<tr><td colspan="7" class="text-end">Total Biaya Uji : Rp <span id="txtBiayaUji">' + totalBiayaUji.toLocaleString('id-ID') + '</span></td></tr>';
+    trFoot += '<tr><td colspan="7" class="text-end">Total Biaya Alat : Rp <span id="txtBiayaAlat">' + totalBiayaAlat.toLocaleString('id-ID') + '</span></td></tr>';
+    trFoot += '<tr><td colspan="7" class="text-end">Total Keseluruhan : Rp <span id="txtKeseluruhan">' + (totalBiayaUji + totalBiayaAlat).toLocaleString('id-ID') + '</span></td></tr>';
 
     $('#tblParameter').append(trHTML);
     $('#tblParameter').append(trFoot);
@@ -250,7 +261,7 @@ function drawTable(data) {
 function clearTable() {
     // remove all existing rows
     $("#tblParameter tr:has(td)").remove();
-    tblNum = 1;
+    tblNum = 0;
     totalBiayaUji = 0;
     totalBiayaAlat = 0;
 
@@ -264,5 +275,38 @@ function clearTable() {
 $(document).on('click', '.delBtn', function () {
     var thisID = $(this).attr('data-id');
 
+    baku.splice(thisID, 1);
+
     $('#row' + thisID).remove();
+
+    drawTable(baku);
+    
 });
+
+$('#btnSave').click(function () {
+    const jns = $('#JenisPengajuan').val();
+    const type = $('#TipePengajuan').val();
+    const param = baku;
+
+    const data = { jenis: jns, tipe: type, parameters: param };
+
+    uji.push(data);
+
+    SumAllBiaya(uji);
+});
+
+function SumAllBiaya(data) {
+    allBiayaUji = 0;
+    allBiayaAlat = 0;
+
+    $.each(data, function (i, item) {
+        $.each(item.parameters, function (x, row) {
+            allBiayaUji += row.biayaUji;
+            allBiayaAlat += row.biayaAlat;
+        })
+    });
+
+    $('.MainBiayaUji').text(allBiayaUji.toLocaleString("id-ID"));
+    $('.MainBiayaAlat').text(allBiayaAlat.toLocaleString("id-ID"));
+    $('.MainBiayaKeseluruhan').text((allBiayaUji + allBiayaAlat).toLocaleString("id-ID"));
+}
