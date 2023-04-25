@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label>Baku Mutu <span class="text-danger">*</span></label>
-                            <select class="form-control"></select>
+                            <select class="form-control sBakuMutu"></select>
                         </div>
                     </div>
                     <div class="col-xl-6 col-xs-12">
@@ -93,6 +93,30 @@
                 <button class="btn btn-warning mr-2" x-on:click="modul = 1">Kembali</button>
                 <button class="btn btn-primary mr-2">Simpan</button>
             </div>
-        </div>       
+        </div> 
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <table id="tblParameter" class="table table-responsive table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Parameter</th>
+                                <th class="text-center">Satuan</th>
+                                <th class="text-center">Metode</th>
+                                <th class="text-center">Biaya Uji</th>
+                                <th class="text-center">Biaya Alat</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak ada data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

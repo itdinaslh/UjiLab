@@ -99,15 +99,45 @@ public class BakuMutuApiController : ControllerBase
     }
 
     [HttpGet("/api/master/baku-mutu/jenis/search")]
-    public async Task<IActionResult> SearchJenis(string? term)
+    public async Task<IActionResult> SearchJenis(string? term, int outputID)
     {
+        var baku = await repo.BakuMutus
+            .Where(x => x.OutputHasilID == outputID)
+            .Select(x => x.JenisBakuMutuID).Distinct().ToListAsync();
+
         var data = await repo.JenisBakuMutus
+            .Where(x => baku.Contains(x.JenisBakuMutuID))
             .Where(k => !String.IsNullOrEmpty(term) ?
                 k.NamaJenis.ToLower().Contains(term.ToLower()) : true
             ).Select(s => new {
                 id = s.JenisBakuMutuID,
                 data = s.NamaJenis
             }).ToListAsync();
+
+        return Ok(data);
+    }
+
+    [HttpGet("/api/master/baku-mutu/table-data")]
+    public async Task<IActionResult> PopulateBakuMutuData(int jenisID)
+    {
+        var data = await repo.BakuMutus
+            .Where(x => x.JenisBakuMutuID == jenisID)
+            .Where(x => x.IsActive == true)
+            .Select(x => new
+            {
+                x.BakuMutuID,
+                x.Parameter.NamaParameter,
+                satuan = x.Parameter.Satuan ?? "",
+                namaMetode = x.MetodeParameter!.NamaMetode ?? "",
+                x.BiayaUji,
+                biayaUjiStr = x.BiayaUji.ToString("Rp #,###"),
+                x.BiayaAlat,
+                biayaAlatStr = x.BiayaAlat == 0 ? "Rp 0" : x.BiayaAlat.ToString("Rp #,###"),
+                x.IsActive, 
+                selected = true
+            })
+            .OrderBy(x => x.BakuMutuID)
+            .ToListAsync();
 
         return Ok(data);
     }
