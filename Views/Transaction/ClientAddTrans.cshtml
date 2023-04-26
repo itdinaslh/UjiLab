@@ -9,13 +9,12 @@
 }
 
 @section styles {
-    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
-    <script defer src="~/js/alpine.min.js"></script>
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />    
     <link rel="stylesheet" href="~/dist/assets/libs/flatpickr/flatpickr.min.css" />
     <link href="~/dist/assets/css/custom.css" rel="stylesheet" type="text/css" />
 }
 
-<div x-data="{ modul: 1 }">
+<div>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -30,11 +29,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div x-show="modul == 1" x-transition>
+    </div>    
+    <div id="modul1">
         <partial name="~/Views/Transaction/ClientMain.cshtml" />
     </div>
-    <div x-show="modul == 2" x-transition>
+    <div id="modul2" style="display:none;">
         <partial name="~/Views/Transaction/ClientDetailUji.cshtml" />
     </div>
 </div>

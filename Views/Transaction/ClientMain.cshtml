@@ -96,15 +96,15 @@
                         <h5 class="card-title mb-0">Contoh Uji</h5>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-primary btn-sm" x-on:click="modul = 2">Tambah</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="ChangeView(2)">Tambah</button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div>
-                    <table class="table table-responsive table-striped">
+                    <table id="mainTable" class="table table-responsive table-striped">
                         <thead class="bg-primary text-white">
-                            <tr>
+                            <tr class="text-center">
                                 <th>No. Contoh Uji</th>
                                 <th>Nama Contoh Uji</th>
                                 <th>Tipe Lokasi</th>

@@ -5,6 +5,8 @@ var totalBiayaAlat = 0;
 var uji = [];
 var allBiayaUji = 0;
 var allBiayaAlat = 0;
+var main = 1;
+var currentModul = 1;
 
 $(document).ready(function () {
     PopulateJenisPengajuan();
@@ -258,6 +260,33 @@ function drawTable(data) {
     $('#tblParameter').append(trFoot);
 }
 
+function drawMainTable(data) {
+    $("#mainTable tr:has(td)").remove();
+    main = 1;
+
+    var trHTML = ''; var trFoot = '';
+
+    $.each(data, function (i, item) {
+        trHTML += '<tr id="main' + main + '" class="text-center"><td>' + '</td><td>'
+            + item.NamaContohUji + '</td><td>'
+            + item.TipeLokasi + '</td><td>'
+            + item.TglSampling + ' ' + item.WaktuSampling + '</td><td>'
+            + item.OutputHasil + '</td><td>'
+            + 'Rp ' + item.BiayaUji.toLocaleString('id-ID') + '</td><td>'
+            + 'Rp ' + item.BiayaAlat.toLocaleString('id-ID') + '</td><td>'
+            + item.Status + '</td><td>'
+            + '<button class="btn btn-primary btn-sm editBtn" data-id="' + main + '"><i class="ri-edit-line"></i></button>'
+            + '</td></tr>';
+    });
+
+    trFoot += '<tr><td colspan="9" class="text-end">Estimasi Total Biaya Uji : Rp <span class="MainBiayaUji">' + '</span></td></tr>';
+    trFoot += '<tr><td colspan="9" class="text-end">Estimasi Total Biaya Alat : Rp <span class="MainBiayaAlat">' + '</span></td></tr>';
+    trFoot += '<tr><td colspan="9" class="text-end">Estimasi Total Keseluruhan : Rp <span class="MainBiayaKeseluruhan">' + '</span></td></tr>';
+
+    $('#mainTable').append(trHTML);
+    $('#mainTable').append(trFoot);
+}
+
 function clearTable() {
     // remove all existing rows
     $("#tblParameter tr:has(td)").remove();
@@ -285,14 +314,39 @@ $(document).on('click', '.delBtn', function () {
 
 $('#btnSave').click(function () {
     const jns = $('#JenisPengajuan').val();
+    const jnsName = $('#JenisPengajuan option:selected').text();
     const type = $('#TipePengajuan').val();
+    const typeName = $('#TipePengajuan option:selected').text();
+    const typeLokasi = $('#TipeLokasi option:selected').text();
+    const tglSampling = $('#TanggalSampling').val();
+    const timeSampling = $('#WaktuSampling').val();
+    const status = 'New';
+    const ujiName = $('#NamaContoh').val();
+    const output = $('#OutputHasilID option:selected').text();
     const param = baku;
 
-    const data = { jenis: jns, tipe: type, parameters: param };
+    const data = {
+        jenis: jns,
+        tipe: type,
+        TipeLokasi: typeLokasi,
+        OutputHasil: output,
+        BiayaUji: totalBiayaUji,
+        BiayaAlat: totalBiayaAlat,
+        TglSampling: tglSampling,
+        WaktuSampling: timeSampling,
+        NamaContohUji: ujiName,
+        Status: status,
+        StatusID: 1,
+        parameters: param
+    };
 
     uji.push(data);
 
+    drawMainTable(uji);
+
     SumAllBiaya(uji);
+
+    ChangeView(1);
 });
 
 function SumAllBiaya(data) {
@@ -310,3 +364,12 @@ function SumAllBiaya(data) {
     $('.MainBiayaAlat').text(allBiayaAlat.toLocaleString("id-ID"));
     $('.MainBiayaKeseluruhan').text((allBiayaUji + allBiayaAlat).toLocaleString("id-ID"));
 }
+
+
+function ChangeView(val) {
+    $('#modul' + currentModul).hide("fast");
+    currentModul = val;
+
+    $('#modul' + val).show("fast");
+}
+

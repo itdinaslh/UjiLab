@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label>Tipe Lokasi <span class="text-danger">*</span></label>
-                            <select class="form-control sTipeLokasi"></select>
+                            <select id="TipeLokasi" class="form-control sTipeLokasi"></select>
                         </div>
                         <div class="form-group mb-3">
                             <label>Nama Contoh Uji <span class="text-danger">*</span></label>
@@ -76,7 +76,7 @@
                     <div class="col-xl-6 col-xs-12">
                         <div class="form-group mb-3">
                             <label>Output Hasil Uji <span class="text-danger">*</span></label>
-                            <select class="form-control sOutputHasil"></select>
+                            <select id="OutputHasilID" class="form-control sOutputHasil"></select>
                         </div>
                         <div class="form-group mb-3">
                             <label>Baku Mutu <span class="text-danger">*</span></label>
@@ -118,7 +118,7 @@
                             </tbody>
                         </table>
                         <div class="text-center mt-2 mb-4">
-                            <button class="btn btn-warning mr-2" x-on:click="modul = 1">Kembali</button>
+                            <button class="btn btn-warning mr-2" onclick="ChangeView(1)">Kembali</button>
                             <button id="btnSave" class="btn btn-primary mr-2">Simpan</button>
                         </div>
                     </div>
