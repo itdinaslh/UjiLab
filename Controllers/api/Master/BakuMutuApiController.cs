@@ -139,4 +139,26 @@ public class BakuMutuApiController : ControllerBase
 
         return Ok(data);
     }
+
+    [HttpGet("/api/master/baku-mutu/all-data")]
+    public async Task<IActionResult> PopulateAllData()
+    {
+        var data = await repo.BakuMutus            
+            .Where(x => x.IsActive == true)
+            .Select(x => new
+            {
+                x.BakuMutuID,
+                x.Parameter.NamaParameter,
+                satuan = x.Parameter.Satuan ?? "",
+                namaMetode = x.MetodeParameter!.NamaMetode ?? "",
+                x.BiayaUji,
+                x.BiayaAlat,
+                x.IsActive,
+                selected = true
+            })
+            .OrderBy(x => x.BakuMutuID)
+            .ToListAsync();
+
+        return Ok(data);
+    }
 }

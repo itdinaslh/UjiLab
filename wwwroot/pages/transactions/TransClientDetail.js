@@ -7,6 +7,8 @@ var allBiayaUji = 0;
 var allBiayaAlat = 0;
 var main = 1;
 var currentModul = 1;
+var paramNum = 0;
+var params = '';
 
 $(document).ready(function () {
     PopulateJenisPengajuan();
@@ -21,6 +23,7 @@ $(document).ready(function () {
     });
     PopulateMetodeSampling();
     PopulateTipeLokasi();
+    PopulateAllParameter();
 });
 
 $('.datepick').flatpickr({
@@ -35,6 +38,18 @@ $('.timepick').flatpickr({
     time_24hr: true,
     position: 'below'
 });
+
+function PopulateAllParameter() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/master/baku-mutu/all-data',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            params = data;
+            drawMainParameter(params);
+        }
+    });
+}
 
 function PopulateJenisPengajuan() {
     $('.sJenisPengajuan').select2({
@@ -258,6 +273,25 @@ function drawTable(data) {
 
     $('#tblParameter').append(trHTML);
     $('#tblParameter').append(trFoot);
+}
+
+function drawMainParameter(data) {
+    $("#tblAllParam tr:has(td)").remove();
+
+    var trHTML = '';
+
+    $.each(data, function (i, item) {
+        trHTML += '<tr id="row' + tblNum + '"><td class="text-center">' + (tblNum + 1) + '</td><td class="text-center">'
+            + item.namaParameter + '</td><td class="text-center">'
+            + item.namaMetode + '</td><td class="text-center">' + 'Rp ' + item.biayaUji.toLocaleString('id-ID')
+            + '</td><td class="text-center">' + 'Rp ' + item.biayaAlat.toLocaleString('id-ID')
+            + '</td><td class="text-center">' + '<button class="btn btn-sm btn-danger delBtn" data-id="' + tblNum + '">' + '<i class="ri-delete-bin-6-line"></i></button>'
+            + '</td></tr>';        
+
+        tblNum += 1;
+    });    
+
+    $('#tblAllParam').append(trHTML);    
 }
 
 function drawMainTable(data) {
