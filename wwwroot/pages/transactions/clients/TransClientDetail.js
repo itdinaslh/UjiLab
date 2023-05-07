@@ -25,11 +25,42 @@ $(document).ready(function () {
     $('#FormTambahPengajuan').validate({
         rules: {
             JenisPengajuan: "required",
-            NamaContoh: "required"
+            TipePengajuan: "required",
+            NamaContoh: "required",
+            TipeLokasi: "required",
+            PetugasSampling: "required",
+            Wadah: "required",
+            TanggalSampling: "required",
+            WaktuSampling: "required",
+            VolumeContoh: "required",
+            MetodeSampling: "required",
+            Pengawetan: "required",
+            Latitude: "required",
+            Longitude: "required",
+            OutputHasilID: "required",
+            BakuMutuID: "required",
+            BadanAir: "required",
+            NamaSungai: "required"
         },
         messages: {
             JenisPengajuan: 'Pilih jenis pengajuan...',
-            NamaContoh: 'Nama Contoh Uji wajib diisi...'
+            TipePengajuan: 'Pilih tipe pengajuan...',
+            NamaContoh: 'Nama Contoh Uji wajib diisi...',
+            TipeLokasi: 'Pilih tipe lokasi',
+            PetugasSampling: 'Isi petugas sampling',
+            Wadah: 'Harap isi wadah..',
+            TanggalSampling: 'Pilh tanggal sampling',
+            WaktuSampling: 'Pilih waktu sampling',
+            VolumeContoh: 'Isi volume contoh',
+            MetodeSampling: 'Pilih metode sampling',
+            Pengawetan: 'Isi jenis pengawetan',
+            Latitude: 'Isi latitude',
+            Longitude: 'Isi longitude',
+            OutputHasilID: 'Pilih output hasil uji',
+            BakuMutuID: 'Pilih baku mutu',
+            BadanAir: 'Pilih badan air',
+            NamaSungai: 'Isi detail lokasi'
+
         },
         errorElement: "em",
         errorPlacement: function (error, element) {
@@ -39,7 +70,7 @@ $(document).ready(function () {
             if (element.prop("type") === "checkbox") {
                 error.insertAfter(element.next("label"));
             } if (element.hasClass('web-select2')) {
-                error.insertAfter(element.next('.select2-container')).addClass('mt-2 text-danger');                
+                error.insertAfter(element.next('.select2-container')).addClass('mt-2 text-danger');
             } else {
                 error.insertAfter(element);
             }
@@ -50,8 +81,30 @@ $(document).ready(function () {
         },
         unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
+        },
+        submitHandler: function (form, e) {
+            e.preventDefault();
+            SubmitDetail();
+            ResetDetailUji();
         }
     });
+});
+
+function ResetDetailUji() {
+    $('.web-select2').val(null).trigger('change');
+    $('#FormTambahPengajuan')[0].reset();
+    $('.is-invalid').removeClass('is-invalid');
+    $('.is-valid').removeClass('is-valid');
+    $('.error').removeClass('error');
+    clearTable();
+}
+
+$('#TipeLokasi').change(function () {
+    $('#TipeLokasi-error').remove();
+});
+
+$('#MetodeSampling').change(function () {
+    $('#MetodeSampling-error').remove();
 });
 
 $('.datepick').flatpickr({
@@ -66,8 +119,6 @@ $('.timepick').flatpickr({
     time_24hr: true,
     position: 'below'
 });
-
-$('#TambahPengajuan').validate();
 
 function drawTable(data) {
     clearTable();
@@ -150,44 +201,43 @@ $(document).on('click', '.delBtn', function () {
     
 });
 
-//$('#btnSaveDetail').click(function () {    
-    
+function SubmitDetail() {   
 
-//    const jns = $('#JenisPengajuan').val();
-//    const jnsName = $('#JenisPengajuan option:selected').text();
-//    const type = $('#TipePengajuan').val();
-//    const typeName = $('#TipePengajuan option:selected').text();
-//    const typeLokasi = $('#TipeLokasi option:selected').text();
-//    const tglSampling = $('#TanggalSampling').val();
-//    const timeSampling = $('#WaktuSampling').val();
-//    const status = 'New';
-//    const ujiName = $('#NamaContoh').val();
-//    const output = $('#OutputHasilID option:selected').text();
-//    const param = baku;
+    const jns = $('#JenisPengajuan').val();
+    const jnsName = $('#JenisPengajuan option:selected').text();
+    const type = $('#TipePengajuan').val();
+    const typeName = $('#TipePengajuan option:selected').text();
+    const typeLokasi = $('#TipeLokasi option:selected').text();
+    const tglSampling = $('#TanggalSampling').val();
+    const timeSampling = $('#WaktuSampling').val();
+    const status = 'Draft';
+    const ujiName = $('#NamaContoh').val();
+    const output = $('#OutputHasilID option:selected').text();
+    const param = baku;
 
-//    const data = {
-//        jenis: jns,
-//        tipe: type,
-//        TipeLokasi: typeLokasi,
-//        OutputHasil: output,
-//        BiayaUji: totalBiayaUji,
-//        BiayaAlat: totalBiayaAlat,
-//        TglSampling: tglSampling,
-//        WaktuSampling: timeSampling,
-//        NamaContohUji: ujiName,
-//        Status: status,
-//        StatusID: 1,
-//        parameters: param
-//    };
+    const data = {
+        jenis: jns,
+        tipe: type,
+        TipeLokasi: typeLokasi,
+        OutputHasil: output,
+        BiayaUji: totalBiayaUji,
+        BiayaAlat: totalBiayaAlat,
+        TglSampling: tglSampling,
+        WaktuSampling: timeSampling,
+        NamaContohUji: ujiName,
+        Status: status,
+        StatusID: 1,
+        parameters: param
+    };
 
-//    uji.push(data);
+    uji.push(data);
 
-//    drawMainTable(uji);
+    drawMainTable(uji);
 
-//    SumAllBiaya(uji);
+    SumAllBiaya(uji);
 
-//    ChangeView(1);
-//});
+    ChangeView(1);
+}
 
 function SumAllBiaya(data) {
     allBiayaUji = 0;
@@ -204,7 +254,6 @@ function SumAllBiaya(data) {
     $('.MainBiayaAlat').text(allBiayaAlat.toLocaleString("id-ID"));
     $('.MainBiayaKeseluruhan').text((allBiayaUji + allBiayaAlat).toLocaleString("id-ID"));
 }
-
 
 function ChangeView(val) {
     $('#modul' + currentModul).hide("fast");

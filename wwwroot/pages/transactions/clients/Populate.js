@@ -1,42 +1,4 @@
-﻿var baku = '';
-var tblNum = 0;
-var totalBiayaUji = 0;
-var totalBiayaAlat = 0;
-var uji = [];
-var allBiayaUji = 0;
-var allBiayaAlat = 0;
-var main = 1;
-var currentModul = 1;
-
-$(document).ready(function () {
-    PopulateJenisPengajuan();
-    $('.sTipePengajuan').select2({
-        placeholder: 'Pilih jenis terlebih dahulu...'
-    });
-    $('.sOutputHasil').select2({
-        placeholder: 'Pilih tipe terlebih dahulu...'
-    });
-    $('.sBakuMutu').select2({
-        placeholder: 'Pilih output hasil uji terlebih dahulu...'
-    });
-    PopulateMetodeSampling();
-    PopulateTipeLokasi();
-});
-
-$('.datepick').flatpickr({
-    dateFormat: 'd-m-Y',
-    position: 'below'
-});
-
-$('.timepick').flatpickr({
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    time_24hr: true,
-    position: 'below'
-});
-
-function PopulateJenisPengajuan() {
+﻿function PopulateJenisPengajuan() {
     $('.sJenisPengajuan').select2({
         placeholder: 'Pilih jenis pengajuan...',
         allowClear: true,
@@ -64,8 +26,11 @@ function PopulateJenisPengajuan() {
     }).on('change', function () {
         $('.sTipePengajuan').val(null).trigger('change');
         var theID = $('.sJenisPengajuan option:selected').val();
-        PopulateTipePengajuan(theID);
-        $('.sTipePengajuan').select2('focus');
+        if (typeof theID != 'undefined') {
+            $('#JenisPengajuan-error').remove();
+            PopulateTipePengajuan(theID);
+            $('.sTipePengajuan').select2('focus');
+        }        
     });
 }
 
@@ -97,8 +62,11 @@ function PopulateTipePengajuan(jenis) {
     }).on('change', function () {
         $('.sOutputHasil').val(null).trigger('change');
         var theID = $('.sTipePengajuan option:selected').val();
-        PopulateOutputHasil(theID);
-        $('.sOutputHasil').select2('focus');
+        if (typeof theID != 'undefined') {
+            $('#TipePengajuan-error').remove();
+            PopulateOutputHasil(theID);
+            $('.sOutputHasil').select2('focus');
+        }        
     });
 }
 
@@ -186,9 +154,12 @@ function PopulateOutputHasil(tipe) {
     }).on('change', function () {
         $('.sBakuMutu').val(null).trigger('change');
         var theID = $('.sOutputHasil option:selected').val();
-        PopulateBakuMutu(theID);
-        clearTable();
-        $('.sBakuMutu').select2('focus');
+        if (typeof theID != 'undefined') {
+            $('#OutputHasilID-error').remove();
+            PopulateBakuMutu(theID);
+            clearTable();
+            $('.sBakuMutu').select2('focus');
+        }      
     });
 }
 
@@ -219,14 +190,17 @@ function PopulateBakuMutu(output) {
         }
     }).on('change', function () {
         var theID = $('.sBakuMutu option:selected').val();
-        $.ajax({
-            type: 'GET',
-            url: '/api/master/baku-mutu/table-data/?jenisID=' + theID,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                baku = data;
-                drawTable(baku);
-            }
-        });
+        if (typeof theID != 'undefined') {
+            $('#BakuMutuID-error').remove();
+            $.ajax({
+                type: 'GET',
+                url: '/api/master/baku-mutu/table-data/?jenisID=' + theID,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    baku = data;
+                    drawTable(baku);
+                }
+            });
+        }        
     });
 }
