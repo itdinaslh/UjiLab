@@ -3,8 +3,19 @@
     Layout = null;
 }
 
-<div class="text-center" style="color:red;">
-    <h1 class="display-4">Access Denied</h1>
-    <p>Your account is denied to access this page!</p>
-    <a href="/login">Go Back</a>
-</div>
+<html>
+    <head>
+        <title>Access Denied</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div class="text-center" style="color:red;">
+            <h1 class="display-4">Access Denied</h1>
+            <p>Your account is denied to access this page!</p>
+            <p>Akun anda ditolak untuk mengakses halaman ini!</p>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+            <a href="/" class="btn btn-success">Kembali</a>
+        </div>
+    </body>
+</html>
+

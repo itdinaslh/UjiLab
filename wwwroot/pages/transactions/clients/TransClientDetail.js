@@ -22,6 +22,8 @@ $(document).ready(function () {
     PopulateMetodeSampling();
     PopulateTipeLokasi();
 
+    GetAllBakuMutu();
+
     $('#FormTambahPengajuan').validate({
         rules: {
             JenisPengajuan: "required",
@@ -147,6 +149,26 @@ function drawTable(data) {
 
     $('#tblParameter').append(trHTML);
     $('#tblParameter').append(trFoot);
+}
+
+function drawAllBakuMutu(data) {
+    $("#tblAllParam tr:has(td)").remove();
+    var num = 0;
+
+    var trHTML = ''; var trFoot = '';
+
+    $.each(data, function (i, item) {
+        trHTML += '<tr id="row' + num + '"><td class="text-center">' + (num + 1) + '</td><td class="text-center">'
+            + item.namaParameter + '</td><td class="text-center">' + item.satuan + '</td><td class="text-center">'
+            + item.namaMetode + '</td><td class="text-center">' + 'Rp ' + item.biayaUji.toLocaleString('id-ID')
+            + '</td><td class="text-center">' + 'Rp ' + item.biayaAlat.toLocaleString('id-ID')
+            + '</td><td class="text-center">' + '<button class="btn btn-sm btn-danger delBtn" data-id="' + num + '">' + '<i class="ri-delete-bin-6-line"></i></button>'
+            + '</td></tr>';        
+
+        num += 1;
+    });   
+
+    $('#tblAllParam').append(trHTML);
 }
 
 function drawMainTable(data) {
