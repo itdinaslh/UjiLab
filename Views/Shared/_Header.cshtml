@@ -343,7 +343,7 @@
                                     }
                                 </span>
                                 <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
-                                    @if (User.IsInRole("SysAdmin"))
+                                    @if (User.IsInRole("SysAdmin") || User.IsInRole("LabAdmin"))
                                     {
                                         <span>System Administrator</span>
                                     } else if (User.IsInRole("LabClient"))
