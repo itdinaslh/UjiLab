@@ -204,3 +204,14 @@ function PopulateBakuMutu(output) {
         }        
     });
 }
+
+function GetAllBakuMutu() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/master/baku-mutu/all-data',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {            
+            drawAllBakuMutu(data);
+        }
+    });
+}
