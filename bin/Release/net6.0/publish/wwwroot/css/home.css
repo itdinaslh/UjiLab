@@ -1,0 +1,34 @@
+﻿.btn-theme {
+    background: linear-gradient( 150deg, #f05138 15%, #ee3a5b 70%, #ed1375 94% );
+    transition: all 300ms ease;
+    color: white;
+}
+
+    .btn-theme:hover {
+        color: white;
+        box-shadow: 0 5px 8px -5px rgb(238, 58, 91, 0.8);
+    }
+
+.text-navy {
+    color: #2b2268;
+}
+
+p {
+    margin: 0;
+}
+
+[heroImage] {
+    width: 40%;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    [heroImage] {
+        display: block;
+        width: 90%;
+        margin: auto;
+        position: static;
+    }
+}
