@@ -33,7 +33,7 @@
         <div id="layout-wrapper">
             <partial name="_Header" />
             <!-- ========== App Menu ========== -->
-            @if (User.IsInRole("SysAdmin"))
+            @if (User.IsInRole("SysAdmin") || User.IsInRole("LabAdmin"))
             {
                 <partial name="_Sidebar" />
             } else if (User.IsInRole("LabClient"))

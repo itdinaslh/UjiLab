@@ -25,7 +25,7 @@ namespace UjiLab.Controllers
             return View();
         }
 
-        [Authorize(Roles = "SysAdmin, LabClient")]
+        [Authorize(Roles = "SysAdmin, LabClient, LabAdmin")]
         [HttpGet("/dashboard")]
         public async Task<IActionResult> Dashboard()
         {
