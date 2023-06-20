@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Data Pengujian";
+    ViewBag.Parent = "Pengujian";
+}
+
+@section plugincss {
+    <!--datatable css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <!--datatable responsive css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
+    <link href="~/dist/assets/css/custom.css" rel="stylesheet" type="text/css" />
+}
+
+<!--Modal Window-->
+<div id='myModal' class='modal fade in' role="dialog" data-bs-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">@ViewBag.Title</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pengujian</a></li>
+                    <li class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- Content -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Data Pengujian Lab</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <table id="tblData" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                        <thead>
+                            <tr role="row">
+                                <th>Tanggal Terima Sample</th>
+                                <th>Output Hasil Uji</th>
+                                <th>Nomor Contoh</th>
+                                <th>Nama PT/Instansi</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jumat, 12 Mei 2023</td>
+                                <td>Air Recycle</td>
+                                <td>00022/LAB.4LC-RC/I/2023</td>
+                                <td>RSUD Kalideres</td>
+                                <td><span class="bg-danger p-2">Proses Revisi</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr >
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>W + LD - Laundry + Domestik</td>
+                                <td>00004/LAB.1LC-W + LD/I/2023</td>
+                                <td>PT TEMPO REALTY</td>
+                                <td><span class="bg-success p-2">Pengujian Analis</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>Air Recycle</td>
+                                <td>00020/LAB.4LC-RC/I/2023</td>
+                                <td>PT Famlee Invesco</td>
+                                <td><span class="bg-success p-2">Proses Penyelia</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr >
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>Air Recycle</td>
+                                <td>00022/LAB.4LC-RC/I/2023</td>
+                                <td>RSUD Kalideres</td>
+                                <td><span class="bg-success p-2">Proses Kasatpel Air</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>Jumat, 12 Mei 2023</td>
+                                <td>Air Recycle</td>
+                                <td>00022/LAB.4LC-RC/I/2023</td>
+                                <td>RSUD Kalideres</td>
+                                <td><span class="bg-success p-2">Proses Kasatpel Mutu</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pluginjs {
+    <!--datatable js-->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <script src="~/lib//autonumeric/autoNumeric.min.js"></script>
+    <script src="~/js/modalForm.js"></script>
+}
+
+@section scripts {
+    <script src="~/pages/pengajuan/list.js"></script>
+}

@@ -1,0 +1,205 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Data Pengajuan Uji Coba</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group mb-3">
+                                    <label>Nomor Pengajuan <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datepick" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group mb-3">
+                                    <label>Tanggal Pengajuan</label>
+                                    <input type="text" class="form-control" value="" readonly />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group mb-3">
+                                    <label>Tanggal Penyerahan </label>
+                                    <input type="text" class="form-control datepick" readonly="readonly" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group mb-3">
+                                    <label>Jenis Layanan <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datepick" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group mb-3">
+                                    <label>Estimasi Tanggal Selesai <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datepick" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-info mt-4">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card bg-success" style="min-height:145px;">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-todo-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Biaya Uji</p>
+                                                <h4 class="fs-4 mb-3 text-white">Rp <span class="MainBiayaUji">0</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card bg-primary card-height-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-flask-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Biaya Alat</p>
+                                                <h4 class="fs-4 mb-3 text-white">Rp <span class="MainBiayaAlat">0</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card bg-danger card-height-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-soft-light text-white rounded-2 fs-2">
+                                                    <i class="ri-price-tag-2-line"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-medium text-white mb-3">Total Biaya</p>
+                                                <h4 class="fs-4 mb-3 text-white">Rp <span class="MainBiayaKeseluruhan">0</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Contoh Uji</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <table id="mainTable" class="table table-responsive table-striped">
+                        <thead class="bg-primary text-white">
+                            <tr class="text-center">
+                                <th>No. Contoh Uji</th>
+                                <th>Nama Contoh Uji</th>
+                                <th>Tipe Lokasi</th>
+                                <th>Waktu Sampling</th>
+                                <th>Output Hasil</th>
+                                <th>Estimasi Biaya Uji</th>
+                                <th>Estimasi Biaya Alat</th>
+                                <th>Status Pengujian</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="9" class="text-center">Belum Ada Data</td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Biaya Uji : Rp. <span class="MainBiayaUji">0</span></td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Biaya Alat : Rp. <span class="MainBiayaAlat">0</span></td>
+                            </tr>
+                            <tr class="text-end">
+                                <td colspan="9">Estimasi Total Keseluruhan : Rp. <span class="MainBiayaKeseluruhan">0</span></td>
+                            </tr>
+                        </tbody>                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="roe">
+    <div class="col-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4>Persetujuan</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="id_type_usaha">Persetujuan <span class="text-danger">*</span> :</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1">
+                                <input class="form-check-input" type="radio" value="approved" name="statusRadio" wire:model="statusRadio">
+                                <label class="form-check-label">Sesuai</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input class="form-check-input" type="radio" value="revision" name="statusRadio" wire:model="statusRadio">
+                                <label class="form-check-label">Revisi</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="id_keterangan">Keterangan <span class="text-danger">*</span> :</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="id_keterangan" name="verifyNote" rows="3" placeholder="" wire:model="verifyNote"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-action="List" asp-controller="Pengajuan" class="btn btn-sm btn-secondary"><i class="ik ik-arrow-left"></i> Back</a>
+
+                <button class="btn btn-sm btn-primary" type="submit" >
+                    <i class="ik ik-send"></i> Submit
+                </button>
+                <button class="btn btn-sm btn-warning" type="submit">
+                    <i class="ik ik-send"></i> Delete Pengajuan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Pengajuan Uji Lab";
+    ViewBag.Parent = "Rencana";
+}
+
+@section plugincss {
+    <!--datatable css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <!--datatable responsive css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert2.min.css" />
+    <link href="~/dist/assets/css/custom.css" rel="stylesheet" type="text/css" />
+}
+
+<!--Modal Window-->
+<div id='myModal' class='modal fade in' role="dialog" data-bs-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">@ViewBag.Title</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Rencana</a></li>
+                    <li class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- Content -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Data Pengajuan Uji Lab</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <table id="tblData" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                        <thead>
+                            <tr role="row">
+                                <th>Tanggal Pengajuan</th>
+                                <th>Nomor Pengajuan</th>
+                                <th>Tanggal Penyerahan Sample</th>
+                                <th>Nama PT/Instansi</th>
+                                <th>Biaya Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>12750/Pengajuan/12052023</td>
+                                <td>2023-05-12</td>
+                                <td>PT TEMPO REALTY</td>
+                                <td>Rp2,985,000</td>
+                                <td><span class="bg-success p-2">Penyerahan Sample</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>12752/Pengajuan/12052023</td>
+                                <td>2023-05-12</td>
+                                <td>PT Famlee Invesco</td>
+                                <td>Rp511,250</td>
+                                <td><span class="bg-success p-2">Penyerahan Sample</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                            <tr >
+                                <td >Jumat, 12 Mei 2023</td>
+                                <td>12752/Pengajuan/12052023</td>
+                                <td>2023-06-07</td>
+                                <td>RSUD Kalideres</td>
+                                <td>Rp0</td>
+                                <td><span class="bg-success p-2">Penyerahan Sample</span></td>
+                                <td><a href="/pengajuan/details" class="btn btn-primary shadow btn-sm btn-icon"><i class="ri-edit-box-line"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pluginjs {
+    <!--datatable js-->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <script src="~/lib//autonumeric/autoNumeric.min.js"></script>
+    <script src="~/js/modalForm.js"></script>
+}
+
+@section scripts {
+    <script src="~/pages/pengajuan/list.js"></script>
+}
